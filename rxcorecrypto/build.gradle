@@ -1,0 +1,27 @@
+apply plugin: 'java-library'
+apply plugin: 'idea'
+apply plugin: 'net.ltgt.apt'
+
+sourceCompatibility = 1.8
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'out/production/classes']
+        }
+    }
+}
+
+dependencies {
+    api project(':corecrypto')
+
+    implementation rootProject.ext.dependencies.javaUtilities
+
+    api rootProject.ext.dependencies.rxJava.core
+
+    testCompile rootProject.ext.dependencies.junit
+
+    testCompile rootProject.ext.dependencies.hamcrest
+
+    testCompile rootProject.ext.dependencies.mockito
+}
