@@ -21,6 +21,8 @@ dependencies {
 
     implementation rootProject.ext.dependencies.javaUtilities
 
+    api rootProject.ext.dependencies.jsr305
+
     api rootProject.ext.dependencies.rxJava.core
 
     testCompile rootProject.ext.dependencies.junit
