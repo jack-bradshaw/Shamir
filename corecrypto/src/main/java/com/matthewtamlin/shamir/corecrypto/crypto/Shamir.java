@@ -177,7 +177,7 @@ public class Shamir {
     }
     
     private BigInteger createRandomCoefficient(final BigInteger prime) {
-        checkArgument(prime.compareTo(ONE) > 1, "\'prime\' must be greater than 1.");
+        checkArgument(prime.compareTo(ONE) > 0, "\'prime\' must be greater than 1.");
         
         // Need to loop until the generated coefficient belongs to (0, limit)
         while (true) {
