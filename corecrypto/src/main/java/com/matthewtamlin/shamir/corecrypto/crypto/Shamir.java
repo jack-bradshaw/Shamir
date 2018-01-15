@@ -15,6 +15,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkEachElementIsNotNull;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 import static java.lang.String.format;
+import static java.math.BigInteger.ONE;
+import static java.math.BigInteger.ZERO;
 
 /**
  * Performs the share creation and secret recovery operations of Shamir's Secret Sharing. The operations are performed in
@@ -116,7 +118,7 @@ public class Shamir {
         BigInteger secret = BigInteger.ZERO;
         
         for (final Share outerShare : shares) {
-            BigInteger outerWorking = BigInteger.ONE;
+            BigInteger outerWorking = ONE;
             
             for (final Share innerShare : shares) {
                 if (outerShare.equals(innerShare)) {
@@ -174,16 +176,22 @@ public class Shamir {
         }
     }
     
-    private BigInteger createRandomCoefficient(final BigInteger absoluteLimit) {
-        // Need to loop until the generated coefficient belongs to (-|absoluteLimit|, |absoluteLimit|)
+    private BigInteger createRandomCoefficient(final BigInteger prime) {
+        checkArgument(prime.compareTo(ONE) > 1, "\'prime\' must be greater than 1.");
+        
+        // Need to loop until the generated coefficient belongs to (0, limit)
         while (true) {
-            final BigInteger randomPositiveCoefficient = new BigInteger(absoluteLimit.bitLength(), random);
+            final BigInteger randomCoefficient = new BigInteger(prime.bitLength(), random);
             
-            if (randomPositiveCoefficient.compareTo(absoluteLimit.abs()) >= 0) {
+            if (randomCoefficient.compareTo(prime) >= 0) {
                 continue;
             }
             
-            return random.nextBoolean() ? randomPositiveCoefficient : randomPositiveCoefficient.negate();
+            if (randomCoefficient.compareTo(ZERO) == 0) {
+                continue;
+            }
+            
+            return randomCoefficient;
         }
     }
 }
