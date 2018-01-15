@@ -4,6 +4,10 @@ apply plugin: 'net.ltgt.apt'
 
 sourceCompatibility = 1.8
 
+group = rootProject.group
+ext.artifactId = 'rxshamir'
+version = '0.0.0'
+
 sourceSets {
     main {
         java {
@@ -25,3 +29,13 @@ dependencies {
 
     testCompile rootProject.ext.dependencies.mockito
 }
+
+ext.name = 'RxShamir'
+ext.description = 'A Java implementation of Shamir\'s Secret Sharing.'
+ext.url = 'https://github.com/MatthewTamlin/Shamir'
+ext.sourceControlUrl = 'https://github.com/MatthewTamlin/Shamir'
+ext.license = [
+        name: 'The Apache Software License, Version 2.0',
+        url: 'https://www.apache.org/licenses/LICENSE-2.0.txt']
+
+apply from: rootProject.file('release-java.gradle')
