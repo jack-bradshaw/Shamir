@@ -4,7 +4,6 @@ import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.sun.istack.internal.NotNull;
 
 import javax.annotation.Nonnull;
 import java.math.BigInteger;
@@ -46,7 +45,7 @@ public abstract class Share {
      * @return the type adapter factory, not null
      */
     @Nonnull
-    public static TypeAdapter<Share> typeAdapter(@NotNull final Gson gson) {
+    public static TypeAdapter<Share> typeAdapter(@Nonnull final Gson gson) {
         return new AutoValue_Share.GsonTypeAdapter(gson);
     }
     
@@ -83,7 +82,7 @@ public abstract class Share {
          *
          * @return this builder, not null
          */
-        @NotNull
+        @Nonnull
         public Builder setIndex(final long index) {
             return setIndex(BigInteger.valueOf(index));
         }
@@ -96,7 +95,7 @@ public abstract class Share {
          *
          * @return this builder, not null
          */
-        @NotNull
+        @Nonnull
         public Builder setValue(final long value) {
             return setValue(BigInteger.valueOf(value));
         }
@@ -110,7 +109,7 @@ public abstract class Share {
          * @throws IllegalStateException
          *         if any of the values are missing or invalid
          */
-        @NotNull
+        @Nonnull
         public Share build() {
             final Share share = autoBuild();
             

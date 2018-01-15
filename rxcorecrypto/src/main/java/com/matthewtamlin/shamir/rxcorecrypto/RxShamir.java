@@ -4,13 +4,14 @@ import com.matthewtamlin.shamir.corecrypto.crypto.Shamir;
 import com.matthewtamlin.shamir.corecrypto.model.CreationScheme;
 import com.matthewtamlin.shamir.corecrypto.model.RecoveryScheme;
 import com.matthewtamlin.shamir.corecrypto.model.Share;
-import com.sun.istack.internal.NotNull;
 import io.reactivex.Single;
 
+import javax.annotation.Nonnull;
 import java.math.BigInteger;
 import java.util.Set;
 
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
+
 
 /**
  * Wraps an instance of {@link Shamir} to provide reactive-style access to its methods. To instantiate the
@@ -37,10 +38,10 @@ public class RxShamir {
      *
      * @return the single, not null
      */
-    @NotNull
+    @Nonnull
     public Single<Set<Share>> createShares(
-            @NotNull final BigInteger secret,
-            @NotNull final CreationScheme creationScheme) {
+            @Nonnull final BigInteger secret,
+            @Nonnull final CreationScheme creationScheme) {
         
         return Single.create((emitter) -> {
             try {
@@ -65,10 +66,10 @@ public class RxShamir {
      *
      * @return the single, not null
      */
-    @NotNull
+    @Nonnull
     public Single<BigInteger> recoverSecret(
-            @NotNull final Set<Share> shares,
-            @NotNull final RecoveryScheme recoveryScheme) {
+            @Nonnull final Set<Share> shares,
+            @Nonnull final RecoveryScheme recoveryScheme) {
         
         return Single.create((emitter) -> {
             try {
@@ -88,8 +89,8 @@ public class RxShamir {
      *
      * @return the wrapper, not null
      */
-    @NotNull
-    public static RxShamir from(@NotNull final Shamir shamir) {
+    @Nonnull
+    public static RxShamir from(@Nonnull final Shamir shamir) {
         return new RxShamir(shamir);
     }
 }
