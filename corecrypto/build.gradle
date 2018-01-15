@@ -27,6 +27,8 @@ dependencies {
     compileOnly rootProject.ext.dependencies.autoValue.core
     apt rootProject.ext.dependencies.autoValue.core
 
+    api rootProject.ext.dependencies.jsr305
+
     implementation rootProject.ext.dependencies.autoValue.gsonPlugin
     apt rootProject.ext.dependencies.autoValue.gsonPlugin
     api rootProject.ext.dependencies.gson

@@ -4,7 +4,6 @@ import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.sun.istack.internal.NotNull;
 
 import javax.annotation.Nonnull;
 import java.math.BigInteger;
@@ -110,7 +109,7 @@ public abstract class RecoveryScheme {
          * @throws IllegalStateException
          *         if any of the values are missing or invalid
          */
-        @NotNull
+        @Nonnull
         public RecoveryScheme build() {
             final RecoveryScheme recoveryScheme = autoBuild();
             
