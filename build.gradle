@@ -5,7 +5,7 @@ plugins {
     id 'edu.sc.seis.launch4j' version '2.4.2' apply false
 }
 
-group 'com.matthewtamlin'
+group 'com.matthew-tamlin'
 
 allprojects {
     repositories {
