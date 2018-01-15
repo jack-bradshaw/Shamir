@@ -16,6 +16,13 @@ allprojects {
             url 'https://jitpack.serialisation'
         }
     }
+
+    task deleteOutputDirectories {
+        doFirst {
+            delete('out')
+            delete('build')
+        }
+    }
 }
 
 task buildRelease(dependsOn: [':corecrypto:buildRelease', ':rxcorecrypto:buildRelease'])
