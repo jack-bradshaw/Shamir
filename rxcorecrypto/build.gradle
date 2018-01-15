@@ -25,6 +25,8 @@ dependencies {
 
     api rootProject.ext.dependencies.rxJava.core
 
+    testCompile rootProject.ext.dependencies.guava
+
     testCompile rootProject.ext.dependencies.junit
 
     testCompile rootProject.ext.dependencies.hamcrest
