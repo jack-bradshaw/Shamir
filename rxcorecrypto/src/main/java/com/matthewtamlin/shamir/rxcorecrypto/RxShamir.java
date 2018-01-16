@@ -14,8 +14,8 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
 
 
 /**
- * Wraps an instance of {@link Shamir} to provide reactive-style access to its methods. To instantiate the
- * class, use the {@link #from(Shamir)} method.
+ * Wraps an instance of {@link Shamir} to provide reactive-style access to its methods. To instantiate the class, use the
+ * {@link #from(Shamir)} method.
  */
 public class RxShamir {
     private Shamir shamir;
@@ -26,9 +26,9 @@ public class RxShamir {
     
     /**
      * Creates a Single which calls the {@link Shamir#createShares(BigInteger, CreationScheme)} method of the wrapped
-     * Shamir instance and emits the resulting shares. Any exceptions thrown by the method are emitted by the single as
+     * Shamir instance and emits the resulting shares. Any throwables thrown by the method are emitted by the single as
      * errors.
-     *
+     * <p>
      * The returned single does not operate by default on a particular scheduler.
      *
      * @param secret
@@ -43,20 +43,13 @@ public class RxShamir {
             @Nonnull final BigInteger secret,
             @Nonnull final CreationScheme creationScheme) {
         
-        return Single.create((emitter) -> {
-            try {
-                emitter.onSuccess(shamir.createShares(secret, creationScheme));
-                
-            } catch (final Throwable t) {
-                emitter.onError(t);
-            }
-        });
+        return Single.fromCallable(() -> shamir.createShares(secret, creationScheme));
     }
     
     /**
      * Creates a Single which calls the {@link Shamir#recoverSecret(Set, RecoveryScheme)} method of the wrapped Shamir
-     * instance and emits the resulting secret. Any exceptions thrown by the method are emitted by the single as errors.
-     *
+     * instance and emits the resulting secret. Any throwables thrown by the method are emitted by the single as errors.
+     * <p>
      * The returned single does not operate by default on a particular scheduler.
      *
      * @param shares
@@ -71,14 +64,7 @@ public class RxShamir {
             @Nonnull final Set<Share> shares,
             @Nonnull final RecoveryScheme recoveryScheme) {
         
-        return Single.create((emitter) -> {
-            try {
-                emitter.onSuccess(shamir.recoverSecret(shares, recoveryScheme));
-                
-            } catch (final Throwable t) {
-                emitter.onError(t);
-            }
-        });
+        return Single.fromCallable(() -> shamir.recoverSecret(shares, recoveryScheme));
     }
     
     /**
