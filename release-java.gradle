@@ -13,8 +13,9 @@ task zipRelease(type: Zip) {
 }
 
 task buildRelease(dependsOn: ['uploadArchives', 'zipRelease']) {
-    println "Release ${version} can be found at ${localReleaseDirectory}/"
-    println "Release ${version} zipped can be found ${buildDir}/release-${version}.zip"
+    doLast {
+        println "Release \'$project.group:$project.ext.artifactId:$version\' can be found at ${localReleaseDirectory}/"
+    }
 }
 
 afterEvaluate { project ->
