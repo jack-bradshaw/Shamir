@@ -1,9 +1,9 @@
 package com.matthewtamlin.shamir.corecrypto.util;
 
 import com.google.auto.value.AutoValue;
+import com.sun.istack.internal.NotNull;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * A single key-value pair.
@@ -16,15 +16,15 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class Pair<K, V> {
     /**
-     * @return the key
+     * @return the key, not null
      */
-    @Nullable
+    @NotNull
     public abstract K getKey();
     
     /**
-     * @return the value
+     * @return the value, not null
      */
-    @Nullable
+    @NotNull
     public abstract V getValue();
     
     /**
@@ -42,7 +42,7 @@ public abstract class Pair<K, V> {
      * @return the new Pair
      */
     @Nonnull
-    public static <K, V> Pair<K, V> create(@Nullable K key, @Nullable V value) {
+    public static <K, V> Pair<K, V> create(@NotNull K key, @NotNull V value) {
         return new AutoValue_Pair<>(key, value);
     }
 }
