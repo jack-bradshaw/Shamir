@@ -43,20 +43,13 @@ public class RxShamir {
             @Nonnull final BigInteger secret,
             @Nonnull final CreationScheme creationScheme) {
         
-        return Single.create((emitter) -> {
-            try {
-                emitter.onSuccess(shamir.createShares(secret, creationScheme));
-                
-            } catch (final Throwable t) {
-                emitter.onError(t);
-            }
-        });
+        return Single.fromCallable(() -> shamir.createShares(secret, creationScheme));
     }
     
     /**
      * Creates a Single which calls the {@link Shamir#recoverSecret(Set, RecoveryScheme)} method of the wrapped Shamir
-     * instance and emits the resulting secret. Any exceptions thrown by the method are emitted by the single as errors.
-     *
+     * instance and emits the resulting secret. Any throwables thrown by the method are emitted by the single as errors.
+     * <p>
      * The returned single does not operate by default on a particular scheduler.
      *
      * @param shares
@@ -71,14 +64,7 @@ public class RxShamir {
             @Nonnull final Set<Share> shares,
             @Nonnull final RecoveryScheme recoveryScheme) {
         
-        return Single.create((emitter) -> {
-            try {
-                emitter.onSuccess(shamir.recoverSecret(shares, recoveryScheme));
-                
-            } catch (final Throwable t) {
-                emitter.onError(t);
-            }
-        });
+        return Single.fromCallable(() -> shamir.recoverSecret(shares, recoveryScheme));
     }
     
     /**
