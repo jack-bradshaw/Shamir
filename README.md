@@ -75,3 +75,53 @@ The example yields `973490247382347` as the recovered secret, which matches the 
 
 ### Compatibility
 The standard API is compatible with Java 1.8 and up.
+
+## Reactive Java API
+The reactive API is functionally the same as the standard API, but the interface has been changed to use reactive types from [RxJava](https://github.com/ReactiveX/RxJava).
+
+### Dependency
+To add the reactive API to your project, add the following to you gradle build file:
+```java
+repositories {
+	jcenter()
+}
+
+dependencies {
+	implementation 'com.matthew-tamlin:rxshamir:1.0.0'
+}
+```
+
+Older versions are available in [the Maven repo](https://bintray.com/matthewtamlin/maven/RxShamir).
+
+### Usage
+This example demonstrates how to use the reactive API to share and recovery a secret. For brevity, the example will use the definitions for the secret, the creation scheme and the recovery scheme from the previous example.
+
+The sharing/recovery operations are provided by the `RxShamir` class. To instantiate the class:
+```java
+Shamir shamir = new Shamir(new SecureRandom());
+RxShamir rxShamir = RxShamir.from(shamir);
+```
+
+To share the secret:
+```java
+Single<Set<Share>> shares = rxShamir.createShares(secret, creationScheme);
+```
+
+To recover the secret:
+```java
+Single<Set<Share>> threeShares = shares
+		.flatMapObservable(Observable::fromIterable)
+		.take(3)
+		.collectInto(new HashSet<Share>(), Set::add);
+
+Single<BigInteger> recoveredSecret = threeShares.flatMap(
+	threeSharesVal -> rxShamir.recoverSecret(threeSharesVal, recoveryScheme));
+```
+
+Subscribing to the `recoveredSecret` single yields `973490247382347` which matches the original secret.
+
+### Compatibility with the standard Java API
+The standard Java API and the reactive API produce the same results, therefore the APIs can be used interchangably without migration/conversion.
+
+### Compatibility
+The reactive API is compatible with Java 1.8 and up.
