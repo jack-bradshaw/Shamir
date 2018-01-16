@@ -125,3 +125,6 @@ The standard Java API and the reactive API produce the same results, therefore t
 
 ### Compatibility
 The reactive API is compatible with Java 1.8 and up.
+
+## GUI
+Currently in development.
