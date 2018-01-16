@@ -4,6 +4,7 @@ import com.matthewtamlin.shamir.corecrypto.math.Polynomial;
 import com.matthewtamlin.shamir.corecrypto.model.CreationScheme;
 import com.matthewtamlin.shamir.corecrypto.model.RecoveryScheme;
 import com.matthewtamlin.shamir.corecrypto.model.Share;
+import com.matthewtamlin.shamir.corecrypto.util.Pair;
 import io.reactivex.Observable;
 
 import javax.annotation.Nonnull;
@@ -60,9 +61,8 @@ public class Shamir {
         
         final Map<Integer, BigInteger> coefficients = Observable
                 .range(1, creationScheme.getRequiredShareCount() - 1)
-                .collectInto(
-                        new HashMap<Integer, BigInteger>(),
-                        (map, index) -> map.put(index, createRandomCoefficient(creationScheme.getPrime())))
+                .map(index -> Pair.create(index, createRandomCoefficient(creationScheme.getPrime())))
+                .collectInto(new HashMap<Integer, BigInteger>(), (map, pair) -> map.put(pair.getKey(), pair.getValue()))
                 .blockingGet();
         
         coefficients.put(0, secret);
@@ -71,13 +71,17 @@ public class Shamir {
         
         return Observable
                 .range(1, creationScheme.getTotalShareCount())
-                .collectInto(
-                        new HashSet<Share>(),
-                        (set, x) -> set.add(Share
-                                .builder()
-                                .setIndex(x)
-                                .setValue(polynomial.evaluateAt(BigInteger.valueOf(x)).mod(creationScheme.getPrime()))
-                                .build()))
+                .map(index -> Pair.create(
+                        index,
+                        polynomial
+                                .evaluateAt(BigInteger.valueOf(index))
+                                .mod(creationScheme.getPrime())))
+                .map(pair -> Share
+                        .builder()
+                        .setIndex(pair.getKey())
+                        .setValue(pair.getValue())
+                        .build())
+                .collectInto(new HashSet<Share>(), HashSet::add)
                 .blockingGet();
     }
     
