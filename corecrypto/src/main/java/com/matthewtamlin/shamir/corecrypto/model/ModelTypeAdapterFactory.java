@@ -13,7 +13,6 @@ import javax.annotation.Nonnull;
 public class ModelTypeAdapterFactory implements TypeAdapterFactory {
     @Override
     @SuppressWarnings("unchecked")
-    @Nonnull
     public <T> TypeAdapter<T> create(@Nonnull final Gson gson, @Nonnull final TypeToken<T> type) {
         final Class<T> rawType = (Class<T>) type.getRawType();
         
