@@ -1,4 +1,4 @@
-package com.matthewtamlin.shamir.corecrypto.crypto;
+package com.matthewtamlin.shamir.standardjavaapi.crypto;
 
 import com.google.common.collect.ImmutableSet;
 import com.matthewtamlin.shamir.commonslibrary.model.CreationScheme;
