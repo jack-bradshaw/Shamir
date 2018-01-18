@@ -1,3 +1,3 @@
 include 'commons-library'
 include 'standard-java-api'
-include 'rxcorecrypto'
+include 'reactive-java-api'

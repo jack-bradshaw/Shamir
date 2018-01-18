@@ -25,8 +25,8 @@ allprojects {
     }
 }
 
-task cleanAllModules(dependsOn: [':corecrypto:deleteOutputDirectories', ':rxcorecrypto:deleteOutputDirectories'])
-task buildAllModules(dependsOn: [':corecrypto:build', ':rxcorecrypto:build'])
-task buildAllReleases(dependsOn: [':corecrypto:buildRelease', ':rxcorecrypto:buildRelease'])
+task cleanAllModules(dependsOn: [':corecrypto:deleteOutputDirectories', ':reactivejavaapi:deleteOutputDirectories'])
+task buildAllModules(dependsOn: [':corecrypto:build', ':reactivejavaapi:build'])
+task buildAllReleases(dependsOn: [':corecrypto:buildRelease', ':reactivejavaapi:buildRelease'])
 
 apply from: 'dependencies.gradle'
