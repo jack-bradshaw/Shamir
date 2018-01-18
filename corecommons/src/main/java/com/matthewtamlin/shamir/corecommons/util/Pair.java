@@ -1,4 +1,4 @@
-package com.matthewtamlin.shamir.corecrypto.util;
+package com.matthewtamlin.shamir.corecommons.util;
 
 import com.google.auto.value.AutoValue;
 

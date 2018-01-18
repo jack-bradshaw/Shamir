@@ -1,7 +1,7 @@
 package com.matthewtamlin.shamir.corecrypto.math;
 
 import com.google.common.collect.ImmutableMap;
-import com.matthewtamlin.shamir.corecrypto.math.Polynomial;
+import com.matthewtamlin.shamir.corecommons.math.Polynomial;
 import org.junit.Test;
 
 import java.math.BigInteger;

@@ -1,5 +1,6 @@
 package com.matthewtamlin.shamir.corecrypto.model;
 
+import com.matthewtamlin.shamir.corecommons.model.RecoveryScheme;
 import org.junit.Test;
 
 import java.math.BigInteger;
