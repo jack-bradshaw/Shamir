@@ -1,6 +1,7 @@
-package com.matthewtamlin.shamir.reactivejavaapi;
+package com.matthewtamlin.shamir.reactivejavaapi.crypto;
 
 import com.google.common.collect.ImmutableSet;
+import com.matthewtamlin.shamir.reactivejavaapi.crypto.RxShamir;
 import com.matthewtamlin.shamir.standardjavaapi.crypto.Shamir;
 import com.matthewtamlin.shamir.commonslibrary.model.CreationScheme;
 import com.matthewtamlin.shamir.commonslibrary.model.RecoveryScheme;
