@@ -1,10 +1,10 @@
 package com.matthewtamlin.shamir.corecrypto.crypto;
 
-import com.matthewtamlin.shamir.corecrypto.math.Polynomial;
-import com.matthewtamlin.shamir.corecrypto.model.CreationScheme;
-import com.matthewtamlin.shamir.corecrypto.model.RecoveryScheme;
-import com.matthewtamlin.shamir.corecrypto.model.Share;
-import com.matthewtamlin.shamir.corecrypto.util.Pair;
+import com.matthewtamlin.shamir.corecommons.math.Polynomial;
+import com.matthewtamlin.shamir.corecommons.model.CreationScheme;
+import com.matthewtamlin.shamir.corecommons.model.RecoveryScheme;
+import com.matthewtamlin.shamir.corecommons.model.Share;
+import com.matthewtamlin.shamir.corecommons.util.Pair;
 import io.reactivex.Observable;
 
 import javax.annotation.Nonnull;

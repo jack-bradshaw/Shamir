@@ -2,9 +2,9 @@ package com.matthewtamlin.shamir.rxcorecrypto;
 
 import com.google.common.collect.ImmutableSet;
 import com.matthewtamlin.shamir.corecrypto.crypto.Shamir;
-import com.matthewtamlin.shamir.corecrypto.model.CreationScheme;
-import com.matthewtamlin.shamir.corecrypto.model.RecoveryScheme;
-import com.matthewtamlin.shamir.corecrypto.model.Share;
+import com.matthewtamlin.shamir.corecommons.model.CreationScheme;
+import com.matthewtamlin.shamir.corecommons.model.RecoveryScheme;
+import com.matthewtamlin.shamir.corecommons.model.Share;
 import org.junit.Before;
 import org.junit.Test;
 

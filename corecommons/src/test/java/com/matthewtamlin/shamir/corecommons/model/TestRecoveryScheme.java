@@ -1,4 +1,4 @@
-package com.matthewtamlin.shamir.corecrypto.model;
+package com.matthewtamlin.shamir.corecommons.model;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.matthewtamlin.shamir.corecrypto.math;
+package com.matthewtamlin.shamir.corecommons.math;
 
 import javax.annotation.Nonnull;
 import java.math.BigInteger;
