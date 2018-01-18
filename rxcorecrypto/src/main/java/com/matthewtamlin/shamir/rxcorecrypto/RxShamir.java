@@ -1,9 +1,9 @@
 package com.matthewtamlin.shamir.rxcorecrypto;
 
 import com.matthewtamlin.shamir.corecrypto.crypto.Shamir;
-import com.matthewtamlin.shamir.corecommons.model.CreationScheme;
-import com.matthewtamlin.shamir.corecommons.model.RecoveryScheme;
-import com.matthewtamlin.shamir.corecommons.model.Share;
+import com.matthewtamlin.shamir.commonslibrary.model.CreationScheme;
+import com.matthewtamlin.shamir.commonslibrary.model.RecoveryScheme;
+import com.matthewtamlin.shamir.commonslibrary.model.Share;
 import io.reactivex.Single;
 
 import javax.annotation.Nonnull;
