@@ -19,7 +19,7 @@ sourceSets {
 dependencies {
     api project(':commons-library')
 
-    api project(':corecrypto')
+    api project(':standard-java-api')
 
     implementation rootProject.ext.dependencies.javaUtilities
 
