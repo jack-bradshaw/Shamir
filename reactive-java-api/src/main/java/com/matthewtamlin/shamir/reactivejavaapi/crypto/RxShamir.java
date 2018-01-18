@@ -1,4 +1,4 @@
-package com.matthewtamlin.shamir.reactivejavaapi;
+package com.matthewtamlin.shamir.reactivejavaapi.crypto;
 
 import com.matthewtamlin.shamir.commonslibrary.model.CreationScheme;
 import com.matthewtamlin.shamir.commonslibrary.model.RecoveryScheme;
