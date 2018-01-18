@@ -1,9 +1,9 @@
 package com.matthewtamlin.shamir.corecrypto.crypto;
 
 import com.google.common.collect.ImmutableSet;
-import com.matthewtamlin.shamir.corecrypto.model.CreationScheme;
-import com.matthewtamlin.shamir.corecrypto.model.RecoveryScheme;
-import com.matthewtamlin.shamir.corecrypto.model.Share;
+import com.matthewtamlin.shamir.corecommons.model.CreationScheme;
+import com.matthewtamlin.shamir.corecommons.model.RecoveryScheme;
+import com.matthewtamlin.shamir.corecommons.model.Share;
 import io.reactivex.Observable;
 import org.junit.Before;
 import org.junit.Test;

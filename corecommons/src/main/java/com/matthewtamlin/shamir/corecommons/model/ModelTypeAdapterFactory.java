@@ -1,4 +1,4 @@
-package com.matthewtamlin.shamir.corecrypto.model;
+package com.matthewtamlin.shamir.corecommons.model;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import javax.annotation.Nonnull;
 
 /**
- * Gson TypeAdapterFactory for all classes in the {@link com.matthewtamlin.shamir.corecrypto.model} package.
+ * Gson TypeAdapterFactory for all classes in the {@link com.matthewtamlin.shamir.corecommons.model} package.
  */
 public class ModelTypeAdapterFactory implements TypeAdapterFactory {
     @Override
