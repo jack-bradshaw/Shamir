@@ -18,6 +18,8 @@ sourceSets {
 }
 
 dependencies {
+    api project(':corecommons')
+
     implementation rootProject.ext.dependencies.javaUtilities
 
     implementation rootProject.ext.dependencies.guava
