@@ -1,5 +1,6 @@
 package com.matthewtamlin.shamir.corecrypto.util;
 
+import com.matthewtamlin.shamir.corecommons.util.Pair;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
