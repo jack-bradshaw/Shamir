@@ -1,4 +1,4 @@
-package com.matthewtamlin.shamir.rxcorecrypto;
+package com.matthewtamlin.shamir.reactivejavaapi;
 
 import com.matthewtamlin.shamir.commonslibrary.model.CreationScheme;
 import com.matthewtamlin.shamir.commonslibrary.model.RecoveryScheme;

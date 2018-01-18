@@ -1,4 +1,4 @@
-package com.matthewtamlin.shamir.rxcorecrypto;
+package com.matthewtamlin.shamir.reactivejavaapi;
 
 import com.google.common.collect.ImmutableSet;
 import com.matthewtamlin.shamir.standardjavaapi.crypto.Shamir;
