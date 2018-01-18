@@ -26,11 +26,18 @@ allprojects {
 }
 
 task cleanAllModules(dependsOn: [
+        ':commons-library:deleteOutputDirectories',
         ':standard-java-api:deleteOutputDirectories',
         ':reactive-java-api:deleteOutputDirectories'])
 
-task buildAllModules(dependsOn: [':standard-java-api:build', ':reactive-java-api:build'])
+task buildAllModules(dependsOn: [
+        ':commons-library:build',
+        ':standard-java-api:build',
+        ':reactive-java-api:build'])
 
-task buildAllReleases(dependsOn: [':standard-java-api:buildRelease', ':reactive-java-api:buildRelease'])
+task buildAllReleases(dependsOn: [
+        ':commons-library:buildRelease',
+        ':standard-java-api:buildRelease',
+        ':reactive-java-api:buildRelease'])
 
 apply from: 'dependencies.gradle'
