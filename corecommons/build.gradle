@@ -21,8 +21,6 @@ dependencies {
 
     implementation rootProject.ext.dependencies.guava
 
-    implementation rootProject.ext.dependencies.rxJava.core
-
     compileOnly rootProject.ext.dependencies.autoValue.core
     apt rootProject.ext.dependencies.autoValue.core
 
