@@ -19,8 +19,6 @@ sourceSets {
 dependencies {
     api project(':commons-library')
 
-    api project(':standard-java-api')
-
     implementation rootProject.ext.dependencies.javaUtilities
 
     implementation rootProject.ext.dependencies.guava
