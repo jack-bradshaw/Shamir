@@ -23,11 +23,11 @@ dependencies {
 
     implementation rootProject.ext.dependencies.javaUtilities
 
+    implementation rootProject.ext.dependencies.guava
+
     api rootProject.ext.dependencies.jsr305
 
     api rootProject.ext.dependencies.rxJava.core
-
-    testCompile rootProject.ext.dependencies.guava
 
     testCompile rootProject.ext.dependencies.junit
 
