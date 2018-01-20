@@ -1,0 +1,45 @@
+apply plugin: 'java-library'
+apply plugin: 'idea'
+apply plugin: 'net.ltgt.apt'
+
+sourceCompatibility = 1.8
+
+group = rootProject.group
+ext.artifactId = 'rxshamir'
+version = '1.0.1'
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'out/production/classes']
+        }
+    }
+}
+
+dependencies {
+    api project(':commons-library')
+
+    implementation rootProject.ext.dependencies.javaUtilities
+
+    implementation rootProject.ext.dependencies.guava
+
+    api rootProject.ext.dependencies.jsr305
+
+    api rootProject.ext.dependencies.rxJava.core
+
+    testCompile rootProject.ext.dependencies.junit
+
+    testCompile rootProject.ext.dependencies.hamcrest
+
+    testCompile rootProject.ext.dependencies.mockito
+}
+
+ext.name = 'RxShamir'
+ext.description = 'A Java implementation of Shamir\'s Secret Sharing.'
+ext.url = 'https://github.com/MatthewTamlin/Shamir'
+ext.sourceControlUrl = 'https://github.com/MatthewTamlin/Shamir'
+ext.license = [
+        name: 'The Apache Software License, Version 2.0',
+        url: 'https://www.apache.org/licenses/LICENSE-2.0.txt']
+
+apply from: rootProject.file('release-java.gradle')

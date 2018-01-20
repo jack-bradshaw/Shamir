@@ -1,2 +1,3 @@
-include 'corecrypto'
-include 'rxcorecrypto'
+include 'commons-library'
+include 'standard-java-api'
+include 'reactive-java-api'
