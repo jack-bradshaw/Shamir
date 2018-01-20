@@ -100,31 +100,39 @@ dependencies {
 Older versions are available in [the Maven repo](https://bintray.com/matthewtamlin/maven/RxShamir).
 
 ### Usage
-This example demonstrates how to use the reactive API to share and recovery a secret. For brevity, the example will use the definitions for the secret, the creation scheme and the recovery scheme from the previous example.
+This example demonstrates how to use the reactive API to share and recover a secret. For brevity, the example will use the definitions for the secret, the prime, the creation scheme and the recovery scheme from the previous example.
 
 The sharing/recovery operations are provided by the `RxShamir` class. To instantiate the class:
 ```java
-Shamir shamir = new Shamir(new SecureRandom());
-RxShamir rxShamir = RxShamir.from(shamir);
+RxShamir shamir = new RxShamir(new SecureRandom());
+```
+
+Alternatively:
+```java
+RxShamir shamir = RxShamir.create(new SecureRandom());
 ```
 
 To share the secret:
 ```java
-Single<Set<Share>> shares = rxShamir.createShares(secret, creationScheme);
+Observable<Share> shares = rxShamir.createShares(secret, creationScheme);
 ```
+
+Each share contains an index and a value. The example yields an observable which emits the following shares:
+- index = 1, value = 1007431061686543935
+- index = 2, value = 1805108382619357109
+- index = 3, value = 88162443832127918
+- index = 4, value = 468279263752244264
+- index = 5, value = 639615833166012196
 
 To recover the secret:
 ```java
-Single<Set<Share>> threeShares = shares
-		.flatMapObservable(Observable::fromIterable)
+Single<BigInteger> recoveredSecret = shares
 		.take(3)
-		.collectInto(new HashSet<Share>(), Set::add);
-
-Single<BigInteger> recoveredSecret = threeShares.flatMap(
-	threeSharesVal -> rxShamir.recoverSecret(threeSharesVal, recoveryScheme));
+		.collectInto(new HashSet<Share>(), Set::add)
+		.flatMap(threeShares -> rxShamir.recoverSecret(threeShares, recoveryScheme));
 ```
 
-Subscribing to the `recoveredSecret` single yields `973490247382347` which matches the original secret.
+The example yields a single that emits `973490247382347`. Thus the recovered secret is equal to the original secret.
 
 ### Compatibility with the standard Java API
 The standard Java API and the reactive API produce the same results, therefore the APIs can be used interchangably without migration/conversion.
