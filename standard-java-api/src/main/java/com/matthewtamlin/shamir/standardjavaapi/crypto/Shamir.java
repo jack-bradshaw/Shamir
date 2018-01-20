@@ -38,6 +38,19 @@ public class Shamir {
     }
     
     /**
+     * Constructs a new Shamir.
+     * <p>
+     * The {@link #Shamir(SecureRandom)} constructor is provided as an alternative to this method.
+     *
+     * @param random
+     *         the random source for use in cryptographic operations, not null
+     */
+    @Nonnull
+    public static Shamir create(@Nonnull final SecureRandom random) {
+        return new Shamir(random);
+    }
+    
+    /**
      * Splits a secret into a set of shares using Shamir's Secret Sharing.
      *
      * @param secret
