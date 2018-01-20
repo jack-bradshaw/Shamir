@@ -9,7 +9,7 @@ import javax.annotation.Nonnull;
 import java.math.BigInteger;
 
 /**
- * A single share produced by sharing a secret with Shamir's Secret Sharing.
+ * A share produced by Shamir's Secret Sharing.
  * <p>
  * A Share consists of an index and a value. In the context of Shamir's secret sharing, the index and the value
  * correspond to the point (index, value) in a finite field.
@@ -37,26 +37,29 @@ public abstract class Share {
     }
     
     /**
-     * Provides a type adapter for serialising this class with Gson.
+     * Creates a type adapter for serialising this class with Gson.
      *
      * @param gson
      *         a Gson instance, not null
      *
-     * @return the type adapter factory, not null
+     * @return the type adapter, not null
      */
     @Nonnull
     public static TypeAdapter<Share> typeAdapter(@Nonnull final Gson gson) {
         return new AutoValue_Share.GsonTypeAdapter(gson);
     }
     
+    /**
+     * Builder class for the {@link Share} class.
+     */
     @AutoValue.Builder
     public static abstract class Builder {
         /**
-         * Sets the index of this share. The index must: <ul><li>Not be null.</li><li>Be greater than or equal to
+         * Sets the index of this share. The index must be: <ul><li>Not null.</li><li>Greater than or equal to
          * 1.</li></ul>
          *
          * @param index
-         *         the index
+         *         the index, not null
          *
          * @return this builder, not null
          */
@@ -66,7 +69,7 @@ public abstract class Share {
          * Sets the value of this share. The value must not be null.
          *
          * @param value
-         *         the value
+         *         the value, not null
          *
          * @return this builder, not null
          */
@@ -104,7 +107,7 @@ public abstract class Share {
          * Constructs a {@link Share} based on this builder. This method will fail if any of the properties were never
          * set or were set to invalid values (see the documentation of each method for specifics).
          *
-         * @return an immutable Share based on this builder, not null
+         * @return a Share based on this builder, not null
          *
          * @throws IllegalStateException
          *         if any of the values are missing or invalid

@@ -28,7 +28,7 @@ public abstract class CreationScheme {
     public abstract int getTotalShareCount();
     
     /**
-     * @return the prime number to use when creating the shares, not null
+     * @return the prime number to use as the basis of the finite field, not null
      */
     @SerializedName("prime")
     public abstract BigInteger getPrime();
@@ -42,12 +42,12 @@ public abstract class CreationScheme {
     }
     
     /**
-     * Provides a type adapter for serialising this class with Gson.
+     * Creates a type adapter for serialising this class with Gson.
      *
      * @param gson
      *         a Gson instance
      *
-     * @return the type adapter factory, not null
+     * @return the type adapter, not null
      */
     @Nonnull
     public static TypeAdapter<CreationScheme> typeAdapter(@Nonnull final Gson gson) {
@@ -60,8 +60,8 @@ public abstract class CreationScheme {
     @AutoValue.Builder
     public static abstract class Builder {
         /**
-         * Sets the number of shares that are needed to recover the secret. The value must: <ul><li>Be greater than
-         * 1.</li><li>Be less than or equal to the total share count.</li><li>Be less than the prime.</li></ul>
+         * Sets the number of shares that are needed to recover the secret. The value must be: <ul><li>Greater than
+         * 1.</li><li>Less than or equal to the total share count.</li><li>Less than the prime.</li></ul>
          *
          * @param count
          *         the minimum number of shares needed to recover the secret
@@ -71,8 +71,8 @@ public abstract class CreationScheme {
         public abstract Builder setRequiredShareCount(int count);
         
         /**
-         * Sets the total number of shares to create. The value must: <ul><li>Be greater than 1.</li><li>Be greater than
-         * or equal to the required share count.</li><li>Be less than the prime.</li></ul>
+         * Sets the total number of shares to create. The value must be: <ul><li>Greater than 1.</li><li>Greater than or
+         * equal to the required share count.</li><li>Less than the prime.</li></ul>
          *
          * @param count
          *         the total number of shares to create
@@ -82,13 +82,12 @@ public abstract class CreationScheme {
         public abstract Builder setTotalShareCount(int count);
         
         /**
-         * Sets the prime number to use when creating the shares. The prime number is used to construct a finite field
-         * and prevent geometric attacks. The value must: <ul><li>Not be null.</li><li>Be greater than 1.</li><li>Be
-         * greater than the required share count.</li><li>Be greater than the total share count.</li><li>Be greater than
-         * the secret it is being used to share.</li></ul>
+         * Sets the prime number to use as the basis of the finite field. The value must be: <ul><li>Not
+         * null.</li><li>Greater than 1.</li><li>Greater than the required share count.</li><li>Greater than the total
+         * share count.</li></ul>
          *
          * @param prime
-         *         the prime to use
+         *         the prime to use, not null
          *
          * @return this builder, not null
          */
@@ -97,10 +96,9 @@ public abstract class CreationScheme {
         abstract CreationScheme autoBuild();
         
         /**
-         * Sets the prime number to use when creating the shares. The prime number is used to construct a finite field
-         * and prevent geometric attacks. The value must: <ul><li>Be greater than 1.</li><li>Be greater than the required
-         * share count.</li><li>Be greater than the total share count.</li><li>Be greater than the secret it is being
-         * used to share.</li></ul>
+         * Sets the prime number to use as the basis of the finite field. The value must be: <ul><li>Not
+         * null.</li><li>Greater than 1.</li><li>Greater than the required share count.</li><li>Greater than the total
+         * share count.</li></ul>
          *
          * @param prime
          *         the prime to use
@@ -114,9 +112,9 @@ public abstract class CreationScheme {
         
         /**
          * Constructs a {@link CreationScheme} based on this builder. This method will fail if any of the properties were
-         * never set or were set to invalid values (see the documentation for each method for specifics).
+         * never set or were set to invalid values (see the documentation of each method for specifics).
          *
-         * @return an immutable CreationScheme based on this builder, not null
+         * @return a CreationScheme based on this builder, not null
          *
          * @throws IllegalStateException
          *         if any of the values are missing or invalid
