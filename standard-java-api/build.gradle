@@ -20,6 +20,8 @@ sourceSets {
 dependencies {
     api project(':commons-library')
 
+    implementation project(':reactive-java-api')
+
     implementation rootProject.ext.dependencies.javaUtilities
 
     implementation rootProject.ext.dependencies.guava
