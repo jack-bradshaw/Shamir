@@ -22,8 +22,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 @SuppressWarnings("ConstantConditions")
 public class TestShamir {
-    private static final BigInteger TWO = BigInteger.valueOf(2);
-    
     private static final BigInteger FIVE = BigInteger.valueOf(5);
     
     private static final BigInteger SEVEN = BigInteger.valueOf(7);
@@ -52,7 +50,8 @@ public class TestShamir {
     
     @Test(expected = IllegalArgumentException.class)
     public void testCreateShares_nullSecret() {
-        final CreationScheme creationScheme = CreationScheme.builder()
+        final CreationScheme creationScheme = CreationScheme
+                .builder()
                 .setRequiredShareCount(2)
                 .setTotalShareCount(2)
                 .setPrime(7)
@@ -75,7 +74,7 @@ public class TestShamir {
                 .setPrime(7)
                 .build();
         
-        shamir.createShares(TWO, creationScheme);
+        shamir.createShares(FIVE, creationScheme);
     }
     
     @Test(expected = IllegalArgumentException.class)
