@@ -20,9 +20,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Unit tests for the {@link Shamir} class.
  */
+@SuppressWarnings("ConstantConditions")
 public class TestShamir {
-    private static final BigInteger TWO = BigInteger.valueOf(2);
-    
     private static final BigInteger FIVE = BigInteger.valueOf(5);
     
     private static final BigInteger SEVEN = BigInteger.valueOf(7);
@@ -39,9 +38,25 @@ public class TestShamir {
         new Shamir(null);
     }
     
+    @Test
+    public void testInstantiate_nonNullRandom() {
+        new Shamir(new SecureRandom());
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testInstantiateStatically_nullRandom() {
+        Shamir.create(null);
+    }
+    
+    @Test
+    public void testInstantiateStatically_nonNullRandom() {
+        Shamir.create(new SecureRandom());
+    }
+    
     @Test(expected = IllegalArgumentException.class)
     public void testCreateShares_nullSecret() {
-        final CreationScheme creationScheme = CreationScheme.builder()
+        final CreationScheme creationScheme = CreationScheme
+                .builder()
                 .setRequiredShareCount(2)
                 .setTotalShareCount(2)
                 .setPrime(7)
@@ -64,10 +79,10 @@ public class TestShamir {
                 .setPrime(7)
                 .build();
         
-        shamir.createShares(TWO, creationScheme);
+        shamir.createShares(FIVE, creationScheme);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateShares_secretEqualToPrime() {
         final CreationScheme creationScheme = CreationScheme
                 .builder()
@@ -79,7 +94,7 @@ public class TestShamir {
         shamir.createShares(FIVE, creationScheme);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateShares_secretGreaterThanPrime() {
         final CreationScheme creationScheme = CreationScheme
                 .builder()
@@ -129,7 +144,7 @@ public class TestShamir {
         shamir.recoverSecret(shares, recoveryScheme);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testRecoverSecret_duplicateShareIndex() {
         final Set<Share> shares = ImmutableSet
                 .<Share>builder()
@@ -146,12 +161,12 @@ public class TestShamir {
         shamir.recoverSecret(shares, recoveryScheme);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateSharesAndRecoverSecret_twoRequiredParts_twoTotalParts_noSharesRecovered() {
         createSharesAndRecoverSecret(2, 2, 0);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateSharesAndRecoverSecret_twoRequiredParts_twoTotalParts_oneShareRecovered() {
         createSharesAndRecoverSecret(2, 2, 1);
     }
@@ -161,12 +176,12 @@ public class TestShamir {
         createSharesAndRecoverSecret(2, 2, 2);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateSharesAndRecoverSecret_twoRequiredParts_threeTotalParts_noShareRecovered() {
         createSharesAndRecoverSecret(2, 3, 1);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateSharesAndRecoverSecret_twoRequiredParts_threeTotalParts_oneShareRecovered() {
         createSharesAndRecoverSecret(2, 3, 1);
     }
@@ -181,7 +196,7 @@ public class TestShamir {
         createSharesAndRecoverSecret(2, 3, 3);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateSharesAndRecoverSecret_tenRequiredParts_oneHundredTotalParts_nineSharesRecovered() {
         createSharesAndRecoverSecret(10, 100, 9);
     }
