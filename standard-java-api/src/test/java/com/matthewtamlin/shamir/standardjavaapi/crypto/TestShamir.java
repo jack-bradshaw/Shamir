@@ -20,6 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Unit tests for the {@link Shamir} class.
  */
+@SuppressWarnings("ConstantConditions")
 public class TestShamir {
     private static final BigInteger TWO = BigInteger.valueOf(2);
     
@@ -37,6 +38,16 @@ public class TestShamir {
     @Test(expected = IllegalArgumentException.class)
     public void testInstantiate_nullRandom() {
         new Shamir(null);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testInstantiateStatically_nullRandom() {
+        Shamir.create(null);
+    }
+    
+    @Test
+    public void testInstantiateStatically_nonNullRandom() {
+        Shamir.create(new SecureRandom());
     }
     
     @Test(expected = IllegalArgumentException.class)
