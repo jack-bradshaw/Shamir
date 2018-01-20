@@ -1,0 +1,46 @@
+apply plugin: 'java-library'
+apply plugin: 'idea'
+apply plugin: 'net.ltgt.apt'
+
+group = rootProject.group
+ext.artifactId = 'shamir-commons'
+version = '1.0.0'
+
+sourceCompatibility = 1.8
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'out/production/classes/generated']
+        }
+    }
+}
+
+dependencies {
+    implementation rootProject.ext.dependencies.javaUtilities
+
+    implementation rootProject.ext.dependencies.guava
+
+    compileOnly rootProject.ext.dependencies.autoValue.core
+    apt rootProject.ext.dependencies.autoValue.core
+
+    api rootProject.ext.dependencies.jsr305
+
+    implementation rootProject.ext.dependencies.autoValue.gsonPlugin
+    apt rootProject.ext.dependencies.autoValue.gsonPlugin
+    api rootProject.ext.dependencies.gson
+
+    testCompile rootProject.ext.dependencies.junit
+
+    testCompile rootProject.ext.dependencies.hamcrest
+}
+
+ext.name = 'Shamir Commons'
+ext.description = 'Common components for the Shamir libraries.'
+ext.url = 'https://github.com/MatthewTamlin/Shamir'
+ext.sourceControlUrl = 'https://github.com/MatthewTamlin/Shamir'
+ext.license = [
+        name: 'The Apache Software License, Version 2.0',
+        url: 'https://www.apache.org/licenses/LICENSE-2.0.txt']
+
+apply from: rootProject.file('release-java.gradle')
