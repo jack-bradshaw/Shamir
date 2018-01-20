@@ -24,7 +24,7 @@ dependencies {
 Older versions are available in [the Maven repo](https://bintray.com/matthewtamlin/maven/Shamir).
 
 ### Usage
-This example demonstrates how to use the standard API to share and recover a secret. The example uses a K=3 N=5 scheme, meaning that 5 shares are created in total and 3 must be obtained to reconstruct the secret. 
+This example demonstrates how to use the standard API to share and recover a secret. The example uses a K=3 N=5 scheme, meaning that 5 shares are created in total and a minimum of 3 are needed to reconstruct the secret.
 
 For the example let the secret be `973490247382347`. 
 
@@ -33,12 +33,16 @@ The sharing/recovery operations are provided by the `Shamir` class. To instantia
 Shamir shamir = new Shamir(new SecureRandom());
 ```
 
+Alternatively:
+```java
+Shamir shamir = Shamir.create(new SecureRandom());
+```
+
 To share the secret:
 ```java
-// 
 BigInteger secret = new BigInteger("973490247382347");
 
-// Must be larger than the secret and the total number of shares
+// The prime must be greater than the secret and the total number of shares
 BigInteger prime = new BigInteger("2305843009213693951");
 
 CreationScheme creationScheme = CreationScheme
@@ -51,7 +55,7 @@ CreationScheme creationScheme = CreationScheme
 Set<Share> shares = shamir.createShares(secret, creationScheme);
 ```
 
-Each share in the returned set contains an index and a value. The example yields the following shares:
+Each share contains an index and a value. The example yields the following shares:
 - index = 1, value = 1007431061686543935
 - index = 2, value = 1805108382619357109
 - index = 3, value = 88162443832127918
@@ -73,7 +77,7 @@ Set<Share> threeShares = takeFirstThree(shares);
 BigInteger recoveredSecret = shamir.recoverSecret(threeShares, recoveryScheme);
 ```
 
-The example yields `973490247382347` as the recovered secret, which matches the original secret.
+The example yields a recovered secret of `973490247382347` which matches the original secret.
 
 ### Compatibility
 The standard API is compatible with Java 1.8 and up.
