@@ -26,8 +26,6 @@ dependencies {
 
     implementation rootProject.ext.dependencies.guava
 
-    implementation rootProject.ext.dependencies.rxJava.core
-
     api rootProject.ext.dependencies.jsr305
 
     testCompile rootProject.ext.dependencies.junit
