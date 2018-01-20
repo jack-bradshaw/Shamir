@@ -3,7 +3,7 @@ apply plugin: 'idea'
 apply plugin: 'net.ltgt.apt'
 
 group = rootProject.group
-ext.artifactId = 'commons'
+ext.artifactId = 'shamir-commons'
 version = '1.0.0'
 
 sourceCompatibility = 1.8
