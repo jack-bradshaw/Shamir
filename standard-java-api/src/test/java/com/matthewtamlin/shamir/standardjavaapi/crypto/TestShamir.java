@@ -82,7 +82,7 @@ public class TestShamir {
         shamir.createShares(FIVE, creationScheme);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateShares_secretEqualToPrime() {
         final CreationScheme creationScheme = CreationScheme
                 .builder()
@@ -94,7 +94,7 @@ public class TestShamir {
         shamir.createShares(FIVE, creationScheme);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateShares_secretGreaterThanPrime() {
         final CreationScheme creationScheme = CreationScheme
                 .builder()
@@ -144,7 +144,7 @@ public class TestShamir {
         shamir.recoverSecret(shares, recoveryScheme);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testRecoverSecret_duplicateShareIndex() {
         final Set<Share> shares = ImmutableSet
                 .<Share>builder()
@@ -161,12 +161,12 @@ public class TestShamir {
         shamir.recoverSecret(shares, recoveryScheme);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateSharesAndRecoverSecret_twoRequiredParts_twoTotalParts_noSharesRecovered() {
         createSharesAndRecoverSecret(2, 2, 0);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateSharesAndRecoverSecret_twoRequiredParts_twoTotalParts_oneShareRecovered() {
         createSharesAndRecoverSecret(2, 2, 1);
     }
@@ -176,12 +176,12 @@ public class TestShamir {
         createSharesAndRecoverSecret(2, 2, 2);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateSharesAndRecoverSecret_twoRequiredParts_threeTotalParts_noShareRecovered() {
         createSharesAndRecoverSecret(2, 3, 1);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateSharesAndRecoverSecret_twoRequiredParts_threeTotalParts_oneShareRecovered() {
         createSharesAndRecoverSecret(2, 3, 1);
     }
@@ -196,7 +196,7 @@ public class TestShamir {
         createSharesAndRecoverSecret(2, 3, 3);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateSharesAndRecoverSecret_tenRequiredParts_oneHundredTotalParts_nineSharesRecovered() {
         createSharesAndRecoverSecret(10, 100, 9);
     }
