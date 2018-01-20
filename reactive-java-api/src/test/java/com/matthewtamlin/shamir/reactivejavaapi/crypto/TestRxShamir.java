@@ -1,110 +1,404 @@
 package com.matthewtamlin.shamir.reactivejavaapi.crypto;
 
 import com.google.common.collect.ImmutableSet;
-import com.matthewtamlin.shamir.reactivejavaapi.crypto.RxShamir;
-import com.matthewtamlin.shamir.standardjavaapi.crypto.Shamir;
 import com.matthewtamlin.shamir.commonslibrary.model.CreationScheme;
 import com.matthewtamlin.shamir.commonslibrary.model.RecoveryScheme;
 import com.matthewtamlin.shamir.commonslibrary.model.Share;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Set;
 
 import static java.math.BigInteger.ONE;
-import static java.math.BigInteger.TEN;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for the {@link RxShamir} class.
  */
+@SuppressWarnings("ConstantConditions")
 public class TestRxShamir {
-    private static final CreationScheme CREATION_SCHEME = CreationScheme
-            .builder()
-            .setRequiredShareCount(2)
-            .setTotalShareCount(3)
-            .setPrime(7)
-            .build();
+    private static final BigInteger FIVE = BigInteger.valueOf(5);
     
-    private static final RecoveryScheme RECOVERY_SCHEME = RecoveryScheme
-            .builder()
-            .setRequiredShareCount(2)
-            .setPrime(7)
-            .build();
-    
-    private Shamir shamir;
+    private static final BigInteger SEVEN = BigInteger.valueOf(7);
     
     private RxShamir rxShamir;
     
     @Before
     public void setup() {
-        shamir = mock(Shamir.class);
-        rxShamir = RxShamir.from(shamir);
+        rxShamir = new RxShamir(new SecureRandom());
     }
     
     @Test(expected = IllegalArgumentException.class)
-    public void testInstantiation_nullShamir() {
-        RxShamir.from(null);
+    public void testInstantiate_nullRandom() {
+        new RxShamir(null);
     }
     
     @Test
-    public void testCreateShares_completesSuccessfully() {
+    public void testInstantiate_nonNullRandom() {
+        new RxShamir(new SecureRandom());
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testInstantiateStatically_nullRandom() {
+        RxShamir.create(null);
+    }
+    
+    @Test
+    public void testInstantiateStatically_nonNullRandom() {
+        RxShamir.create(new SecureRandom());
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateShares_nullSecret() {
+        final CreationScheme creationScheme = CreationScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setTotalShareCount(2)
+                .setPrime(7)
+                .build();
+        
+        rxShamir.createShares(null, creationScheme);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateShares_nullCreationScheme() {
+        rxShamir.createShares(ONE, null);
+    }
+    
+    @Test
+    public void testCreateShares_secretLessThanPrime() {
+        final CreationScheme creationScheme = CreationScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setTotalShareCount(3)
+                .setPrime(7)
+                .build();
+        
+        rxShamir.createShares(FIVE, creationScheme)
+                .test()
+                .awaitDone(200, MILLISECONDS)
+                .assertNoErrors()
+                .assertComplete();
+    }
+    
+    @Test
+    public void testCreateShares_secretEqualToPrime() {
+        final CreationScheme creationScheme = CreationScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setTotalShareCount(3)
+                .setPrime(5)
+                .build();
+        
+        rxShamir.createShares(FIVE, creationScheme)
+                .test()
+                .awaitDone(200, MILLISECONDS)
+                .assertError(IllegalStateException.class)
+                .assertNotComplete();
+    }
+    
+    @Test
+    public void testCreateShares_secretGreaterThanPrime() {
+        final CreationScheme creationScheme = CreationScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setTotalShareCount(3)
+                .setPrime(5)
+                .build();
+        
+        rxShamir.createShares(SEVEN, creationScheme)
+                .test()
+                .awaitDone(200, MILLISECONDS)
+                .assertError(IllegalStateException.class)
+                .assertNotComplete();
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testRecoverSecret_nullShares() {
+        final RecoveryScheme recoveryScheme = RecoveryScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setPrime(7)
+                .build();
+        
+        rxShamir.recoverSecret(null, recoveryScheme);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testRecoverSecret_sharesContainsNull() {
+        final Set<Share> shares = new HashSet<>();
+        
+        shares.add(Share.builder().setIndex(1).setValue(1).build());
+        shares.add(null);
+        
+        final RecoveryScheme recoveryScheme = RecoveryScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setPrime(7)
+                .build();
+        
+        rxShamir.recoverSecret(shares, recoveryScheme);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testRecoverSecret_nullRecoveryScheme() {
+        final Set<Share> shares = ImmutableSet
+                .<Share>builder()
+                .add(Share.builder().setIndex(1).setValue(1).build())
+                .add(Share.builder().setIndex(1).setValue(2).build())
+                .build();
+        
+        rxShamir.recoverSecret(shares, null);
+    }
+    
+    @Test
+    public void testRecoverSecret_duplicateShareIndex() {
+        final Set<Share> shares = ImmutableSet
+                .<Share>builder()
+                .add(Share.builder().setIndex(1).setValue(1).build())
+                .add(Share.builder().setIndex(1).setValue(2).build())
+                .build();
+        
+        final RecoveryScheme recoveryScheme = RecoveryScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setPrime(7)
+                .build();
+        
+        rxShamir.recoverSecret(shares, recoveryScheme)
+                .test()
+                .awaitDone(200, MILLISECONDS)
+                .assertError(IllegalStateException.class)
+                .assertNotComplete();
+    }
+    
+    @Test
+    public void testRecoverSecret_shareIndexLessThanPrime() {
         final Set<Share> shares = ImmutableSet
                 .<Share>builder()
                 .add(Share.builder().setIndex(1).setValue(1).build())
                 .add(Share.builder().setIndex(2).setValue(2).build())
                 .build();
         
-        when(shamir.createShares(any(), any())).thenReturn(shares);
+        final RecoveryScheme recoveryScheme = RecoveryScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setPrime(7)
+                .build();
         
-        rxShamir.createShares(ONE, CREATION_SCHEME)
+        rxShamir.recoverSecret(shares, recoveryScheme)
                 .test()
                 .awaitDone(200, MILLISECONDS)
                 .assertNoErrors()
-                .assertValue(shares);
+                .assertComplete();
     }
     
     @Test
-    public void testCreateShares_completesWithError() throws InterruptedException {
-        final RuntimeException error = new RuntimeException();
+    public void testRecoverSecret_shareIndexEqualToPrime() {
+        final Set<Share> shares = ImmutableSet
+                .<Share>builder()
+                .add(Share.builder().setIndex(7).setValue(1).build())
+                .add(Share.builder().setIndex(2).setValue(2).build())
+                .build();
         
-        when(shamir.createShares(any(), any())).thenThrow(error);
+        final RecoveryScheme recoveryScheme = RecoveryScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setPrime(7)
+                .build();
         
-        rxShamir.createShares(ONE, CREATION_SCHEME)
+        rxShamir.recoverSecret(shares, recoveryScheme)
                 .test()
                 .awaitDone(200, MILLISECONDS)
-                .assertError(error)
-                .assertNoValues();
+                .assertError(IllegalStateException.class)
+                .assertNotComplete();
     }
     
     @Test
-    public void testRecoverSecret_completesSuccessfully() {
-        final BigInteger secret = TEN;
+    public void testRecoverSecret_shareIndexGreaterThanPrime() {
+        final Set<Share> shares = ImmutableSet
+                .<Share>builder()
+                .add(Share.builder().setIndex(8).setValue(1).build())
+                .add(Share.builder().setIndex(2).setValue(2).build())
+                .build();
         
-        when(shamir.recoverSecret(any(), any())).thenReturn(secret);
+        final RecoveryScheme recoveryScheme = RecoveryScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setPrime(7)
+                .build();
         
-        rxShamir.recoverSecret(new HashSet<>(), RECOVERY_SCHEME)
+        rxShamir.recoverSecret(shares, recoveryScheme)
+                .test()
+                .awaitDone(200, MILLISECONDS)
+                .assertError(IllegalStateException.class)
+                .assertNotComplete();
+    }
+    
+    @Test
+    public void testRecoverSecret_shareValueLessThanPrime() {
+        final Set<Share> shares = ImmutableSet
+                .<Share>builder()
+                .add(Share.builder().setIndex(1).setValue(1).build())
+                .add(Share.builder().setIndex(2).setValue(2).build())
+                .build();
+        
+        final RecoveryScheme recoveryScheme = RecoveryScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setPrime(7)
+                .build();
+        
+        rxShamir.recoverSecret(shares, recoveryScheme)
                 .test()
                 .awaitDone(200, MILLISECONDS)
                 .assertNoErrors()
-                .assertValue(secret);
+                .assertComplete();
     }
     
     @Test
-    public void testRecoverSecret_completesWithError() {
-        final RuntimeException error = new RuntimeException();
+    public void testRecoverSecret_shareValueEqualToPrime() {
+        final Set<Share> shares = ImmutableSet
+                .<Share>builder()
+                .add(Share.builder().setIndex(1).setValue(7).build())
+                .add(Share.builder().setIndex(2).setValue(2).build())
+                .build();
         
-        when(shamir.recoverSecret(any(), any())).thenThrow(error);
+        final RecoveryScheme recoveryScheme = RecoveryScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setPrime(7)
+                .build();
         
-        rxShamir.recoverSecret(new HashSet<>(), RECOVERY_SCHEME)
+        rxShamir.recoverSecret(shares, recoveryScheme)
                 .test()
                 .awaitDone(200, MILLISECONDS)
-                .assertError(error)
-                .assertNoValues();
+                .assertError(IllegalStateException.class)
+                .assertNotComplete();
+    }
+    
+    @Test
+    public void testRecoverSecret_shareValueGreaterThanPrime() {
+        final Set<Share> shares = ImmutableSet
+                .<Share>builder()
+                .add(Share.builder().setIndex(1).setValue(8).build())
+                .add(Share.builder().setIndex(2).setValue(2).build())
+                .build();
+        
+        final RecoveryScheme recoveryScheme = RecoveryScheme
+                .builder()
+                .setRequiredShareCount(2)
+                .setPrime(7)
+                .build();
+        
+        rxShamir.recoverSecret(shares, recoveryScheme)
+                .test()
+                .awaitDone(200, MILLISECONDS)
+                .assertError(IllegalStateException.class)
+                .assertNotComplete();
+    }
+    
+    @Test
+    public void testCreateSharesAndRecoverSecret_twoRequiredParts_twoTotalParts_noSharesRecovered() {
+        createSharesAndRecoverSecret(2, 2, 0, false);
+    }
+    
+    @Test
+    public void testCreateSharesAndRecoverSecret_twoRequiredParts_twoTotalParts_oneShareRecovered() {
+        createSharesAndRecoverSecret(2, 2, 1, false);
+    }
+    
+    @Test
+    public void testCreateSharesAndRecoverSecret_twoRequiredParts_twoTotalParts_twoSharesRecovered() {
+        createSharesAndRecoverSecret(2, 2, 2, true);
+    }
+    
+    @Test
+    public void testCreateSharesAndRecoverSecret_twoRequiredParts_threeTotalParts_noShareRecovered() {
+        createSharesAndRecoverSecret(2, 3, 0, false);
+    }
+    
+    @Test
+    public void testCreateSharesAndRecoverSecret_twoRequiredParts_threeTotalParts_oneShareRecovered() {
+        createSharesAndRecoverSecret(2, 3, 1, false);
+    }
+    
+    @Test
+    public void testCreateSharesAndRecoverSecret_twoRequiredParts_threeTotalParts_twoShareRecovered() {
+        createSharesAndRecoverSecret(2, 3, 2, true);
+    }
+    
+    @Test
+    public void testCreateSharesAndRecoverSecret_twoRequiredParts_threeTotalParts_threeSharesRecovered() {
+        createSharesAndRecoverSecret(2, 3, 3, true);
+    }
+    
+    @Test
+    public void testCreateSharesAndRecoverSecret_tenRequiredParts_oneHundredTotalParts_nineSharesRecovered() {
+        createSharesAndRecoverSecret(10, 100, 9, false);
+    }
+    
+    @Test
+    public void testCreateSharesAndRecoverSecret_tenRequiredParts_oneHundredTotalParts_tenShareRecovered() {
+        createSharesAndRecoverSecret(10, 100, 10, true);
+    }
+    
+    @Test
+    public void testCreateSharesAndRecoverSecret_tenRequiredParts_oneHundredTotalParts_elevenSharesRecovered() {
+        createSharesAndRecoverSecret(10, 100, 11, true);
+    }
+    
+    private void createSharesAndRecoverSecret(
+            final int requiredShareCount,
+            final int totalShareCount,
+            final int recoveredShareCount,
+            final boolean expectPass) {
+        
+        final BigInteger secret = new BigInteger("1298074214633706835075030044377087");
+        final BigInteger prime = new BigInteger("1298074214633706835075030044421213");
+        
+        final CreationScheme creationScheme = CreationScheme
+                .builder()
+                .setRequiredShareCount(requiredShareCount)
+                .setTotalShareCount(totalShareCount)
+                .setPrime(prime)
+                .build();
+        
+        final RecoveryScheme recoveryScheme = RecoveryScheme
+                .builder()
+                .setRequiredShareCount(requiredShareCount)
+                .setPrime(prime)
+                .build();
+        
+        final RxShamir shamir = new RxShamir(new SecureRandom());
+        
+        final Observable<Share> allShares = shamir.createShares(secret, creationScheme);
+        
+        final Observable<Share> recoveredShares = allShares
+                .take(recoveredShareCount);
+        
+        final Single<BigInteger> recoverSecret = recoveredShares
+                .collectInto(new HashSet<Share>(), Set::add)
+                .flatMap(recoveredShareSet -> shamir.recoverSecret(recoveredShareSet, recoveryScheme));
+        
+        if (expectPass) {
+            recoverSecret
+                    .test()
+                    .assertNoErrors()
+                    .assertComplete()
+                    .assertValue(secret);
+        
+        } else {
+            recoverSecret
+                    .test()
+                    .assertError(IllegalStateException.class)
+                    .assertNotComplete();
+        }
     }
 }
