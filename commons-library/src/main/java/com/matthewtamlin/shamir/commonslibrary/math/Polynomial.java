@@ -16,9 +16,9 @@ public class Polynomial {
     private final Map<Integer, BigInteger> coefficients;
     
     /**
-     * Constructs a new Polynomial usign the provided map to define the coefficient for each exponent. For example, the
+     * Constructs a new Polynomial using the provided map to define the coefficient for each exponent. For example, the
      * map {@code [0:3, 1:20, 2:-5, 4:100]} produces a polynomial equivalent to {@code 3 + 20x - 5x^2 + 100x^4}. Any
-     * coefficient which is not defined defaults to zero.
+     * coefficient which is not defined in the map defaults to zero.
      *
      * @param coefficients
      *         the exponent to coefficient mapping, not null, not containing null
