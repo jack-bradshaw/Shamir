@@ -38,7 +38,7 @@ public abstract class Pair<K, V> {
      * @param <V>
      *         the type of the value
      *
-     * @return the new Pair
+     * @return the new Pair, not null
      */
     @Nonnull
     public static <K, V> Pair<K, V> create(@Nonnull K key, @Nonnull V value) {

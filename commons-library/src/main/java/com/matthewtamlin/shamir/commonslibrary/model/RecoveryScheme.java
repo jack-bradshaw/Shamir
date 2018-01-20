@@ -11,8 +11,7 @@ import java.math.BigInteger;
 import static java.lang.String.format;
 
 /**
- * Defines the parameters to use when recovering a secret with Shamir's Secret Sharing. To successfully recover a secret,
- * the recovery scheme values must match the values used when creating the secret.
+ * Defines the parameters to use when recovering a secret with Shamir's Secret Sharing.
  */
 @AutoValue
 public abstract class RecoveryScheme {
@@ -23,7 +22,7 @@ public abstract class RecoveryScheme {
     public abstract int getRequiredShareCount();
     
     /**
-     * @return the prime number which was used when sharing the secret
+     * @return the prime number to use as the basis of the finite field, not null
      */
     @SerializedName("prime")
     public abstract BigInteger getPrime();
@@ -37,12 +36,12 @@ public abstract class RecoveryScheme {
     }
     
     /**
-     * Provides a type adapter for serialising this class with Gson.
+     * Creates a type adapter for serialising this class with Gson.
      *
      * @param gson
      *         a Gson instance, not null
      *
-     * @return the type adapter factory, not null
+     * @return the type adapter, not null
      */
     @Nonnull
     public static TypeAdapter<RecoveryScheme> typeAdapter(@Nonnull final Gson gson) {
@@ -55,10 +54,8 @@ public abstract class RecoveryScheme {
     @AutoValue.Builder
     public static abstract class Builder {
         /**
-         * Sets the number of shares that are needed to recovery the secret. The value must: <ul><li>Be greater than
-         * 1.</li><li>Be less than the prime.</li></ul>
-         * <p>
-         * To successfully recover a secret, this value must match the value used when creating the secret.
+         * Sets the number of shares that are needed to recovery the secret. The value must be: <ul><li>Greater than
+         * 1.</li><li>Less than the prime.</li></ul>
          *
          * @param requiredShareCount
          *         the required share count
@@ -68,27 +65,21 @@ public abstract class RecoveryScheme {
         public abstract Builder setRequiredShareCount(int requiredShareCount);
         
         /**
-         * Sets the prime number to use when recovering the shares. The prime number is used to construct a finite field
-         * and prevent geometric attacks. The value must: <ul><li>Not be null.</li><li>Be greater than 1.</li><li>Be
-         * greater than the total share count.</li><li>Be greater than the secret it is being used to recover.</li></ul>
-         * <p>
-         * To successfully recover a secret, this value must match the value used when creating the secret.
+         * Sets the prime number to use as the basis of the finite field. The value must be: <ul><li>Not
+         * null.</li><li>Greater than 1.</li><li>Greater than the required share count.</li>/ul>
          *
          * @param prime
-         *         the prime to use
+         *         the prime to use, not null
          *
          * @return this builder, not null
          */
         public abstract Builder setPrime(BigInteger prime);
         
         abstract RecoveryScheme autoBuild();
-        
+    
         /**
-         * Sets the prime number to use when recovering the shares. The prime number is used to construct a finite field
-         * and prevent geometric attacks. The value must: <ul><li>Be greater than 1.</li><li>Be greater than the total
-         * share count.</li><li>Be greater than the secret it is being used to recover.</li></ul>
-         * <p>
-         * To successfully recover a secret, this value must equal the value used when creating the secret.
+         * Sets the prime number to use as the basis of the finite field. The value must be: <ul><li>Not
+         * null.</li><li>Greater than 1.</li><li>Greater than the required share count.</li>/ul>
          *
          * @param prime
          *         the prime to use
@@ -102,9 +93,9 @@ public abstract class RecoveryScheme {
         
         /**
          * Constructs a {@link RecoveryScheme} based on this builder. This method will fail if any of the properties were
-         * never set or were set to invalid values (see the documentation for each method for specifics).
+         * never set or were set to invalid values (see the documentation of each method for specifics).
          *
-         * @return an immutable RecoveryScheme based on this builder, not null
+         * @return a RecoveryScheme based on this builder, not null
          *
          * @throws IllegalStateException
          *         if any of the values are missing or invalid
