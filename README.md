@@ -134,11 +134,11 @@ Single<BigInteger> recoveredSecret = shares
 
 The example yields a single that emits `973490247382347`. Thus the recovered secret is equal to the original secret.
 
-### Compatibility with the standard Java API
-The standard Java API and the reactive API produce the same results, therefore the APIs can be used interchangably without migration/conversion.
-
 ### Compatibility
 The reactive API is compatible with Java 1.8 and up.
+
+## Compatibility between APIs
+The standard API and the reactive API produce the same results given the same inputs, therefore the APIs can be used interchangably without migration/conversion.
 
 ## GUI
 Currently in development.
