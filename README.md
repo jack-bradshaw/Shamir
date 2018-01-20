@@ -93,7 +93,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.matthew-tamlin:rxshamir:1.0.1'
+	implementation 'com.matthew-tamlin:rxshamir:2.0.0'
 }
 ```
 
