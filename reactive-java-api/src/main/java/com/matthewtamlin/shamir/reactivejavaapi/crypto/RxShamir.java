@@ -37,7 +37,7 @@ public class RxShamir {
      * The {@link #create(SecureRandom)} static method is provided as an alternative to this constructor.
      *
      * @param random
-     *         the random source for use in cryptographic operations, not null
+     *         the random source to use in the cryptographic operations, not null
      */
     public RxShamir(@Nonnull final SecureRandom random) {
         this.random = checkNotNull(random, "\'random\' must not be null.");
@@ -49,7 +49,7 @@ public class RxShamir {
      * The {@link #RxShamir(SecureRandom)} constructor is provided as an alternative to this method.
      *
      * @param random
-     *         the random source for use in cryptographic operations, not null
+     *         the random source to use in the cryptographic operations, not null
      */
     @Nonnull
     public static RxShamir create(@Nonnull final SecureRandom random) {
@@ -67,7 +67,7 @@ public class RxShamir {
      * @param secret
      *         the secret to share, not null
      * @param creationScheme
-     *         defines the sharing configuration, not null
+     *         the sharing configuration, not null
      *
      * @return an observable which emits the shares then completes, not null
      */
@@ -107,27 +107,19 @@ public class RxShamir {
     /**
      * Recovers a secret from a set of shares using Shamir's Secret Sharing.
      * <p>
-     * The operation will fail with an {@link IllegalStateException} if: <ul><li>The shares do not have mutually distinct
-     * indices.</li> <li>The number of shares is less than the required share count specified in the recovery
-     * scheme.</li> <li>The index of any share is greater than or equal to the prime specified in the recovery
-     * scheme.</li> <li>The value of any share is greater than or equal to the prime specified in the recovery
-     * scheme.</li></ul>
+     * The operation will fail with an {@link IllegalStateException} if: <ul><li>Two or more shares have the same
+     * index</li> <li>The number of shares is less than the required share count specified in the recovery scheme.</li>
+     * <li>The index of any share is greater than or equal to the prime specified in the recovery scheme.</li> <li>The
+     * value of any share is greater than or equal to the prime specified in the recovery scheme.</li></ul>
+     *
+     * The returned single does not operate on a particular scheduler by default.
      *
      * @param shares
      *         the shares to reconstruct the secret from, not null, not containing null
      * @param recoveryScheme
-     *         defines the recovery configuration, not null
+     *         the recovery configuration, not null
      *
      * @return a single which emits the recovered secret, not null
-     *
-     * @throws IllegalArgumentException
-     *         if two or more shares have the same index
-     * @throws IllegalArgumentException
-     *         if the number of shares is less than the required share count defined in the recovery scheme
-     * @throws IllegalArgumentException
-     *         if the index of any share is greater than or equal to the prime defined in the recovery scheme
-     * @throws IllegalArgumentException
-     *         if the value of any share is greater than or equal to the prime defined in the recovery scheme
      */
     @Nonnull
     public Single<BigInteger> recoverSecret(
