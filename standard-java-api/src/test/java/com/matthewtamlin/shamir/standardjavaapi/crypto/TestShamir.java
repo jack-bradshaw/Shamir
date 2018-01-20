@@ -38,6 +38,11 @@ public class TestShamir {
         new Shamir(null);
     }
     
+    @Test
+    public void testInstantiate_nonNullRandom() {
+        new Shamir(new SecureRandom());
+    }
+    
     @Test(expected = IllegalArgumentException.class)
     public void testInstantiateStatically_nullRandom() {
         Shamir.create(null);
