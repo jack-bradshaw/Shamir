@@ -1,8 +1,10 @@
 # Shamir
-[Shamir's Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) in three forms:
+Shamir's Secret Sharing( in three forms:
 - A standard Java API
 - A reactive Java API
 - A GUI (still in development)
+
+Having at least a cursory understanding of Shamir's Secret Sharing is beneficial before using the APIs. The [Wikipedia entry](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) is recommended as a good starting point.
 
 ## Standard Java API
 The standard Java API provides Shamir's Secret Sharing using standard Java patterns.
