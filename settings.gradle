@@ -1,3 +1,4 @@
 include 'commons-library'
 include 'standard-java-api'
 include 'reactive-java-api'
+include 'app'
