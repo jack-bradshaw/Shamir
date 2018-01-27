@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.matthew-tamlin:shamir:2.0.0'
+	implementation 'com.matthew-tamlin:shamir:2.0.1'
 }
 ```
 
@@ -95,7 +95,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.matthew-tamlin:rxshamir:2.0.0'
+	implementation 'com.matthew-tamlin:rxshamir:2.0.1'
 }
 ```
 
