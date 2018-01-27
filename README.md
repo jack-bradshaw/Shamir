@@ -1,8 +1,10 @@
 # Shamir
-Shamir's Secret Sharing( in three forms:
+Shamir's Secret Sharing in three forms:
 - A standard Java API
 - A reactive Java API
 - A GUI (still in development)
+
+All forms use finite field arithmetic to prevent geometric attacks.
 
 Having at least a cursory understanding of Shamir's Secret Sharing is beneficial before using the APIs. The [Wikipedia entry](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) is recommended as a good starting point.
 
@@ -17,7 +19,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.matthew-tamlin:shamir:2.0.0'
+	implementation 'com.matthew-tamlin:shamir:2.0.1'
 }
 ```
 
@@ -93,7 +95,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.matthew-tamlin:rxshamir:2.0.0'
+	implementation 'com.matthew-tamlin:rxshamir:2.0.1'
 }
 ```
 
