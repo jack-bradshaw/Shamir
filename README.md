@@ -1,5 +1,5 @@
 # Shamir
-Shamir's Secret Sharing( in three forms:
+Shamir's Secret Sharing in three forms:
 - A standard Java API
 - A reactive Java API
 - A GUI (still in development)
