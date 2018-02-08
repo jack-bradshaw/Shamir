@@ -148,20 +148,22 @@ The GUI app provides a simple way to use Shamir's Secret Sharing.
 <img src="https://i.imgur.com/qt8NAGU.png" width="500">
 
 ### Usage
-The GUI app is still in development and has not yet been released as a binary, so you'll need to build it from the source.
+The GUI app is still in development so has not yet been released as a binary. To use it you'll need to build it from the source.
 
-Start by cloning the repository. You can the download it from the Github website, clone it with a git GUI client, or clone it by running:
+Start by getting a copy of the develop branch. You can the download it from [Github](https://github.com/MatthewTamlin/Shamir/tree/develop) or clone it by running:
 ```shell
-git clone https://github.com/MatthewTamlin/Shamir
+git clone -b develop https://github.com/MatthewTamlin/Shamir
 ```
 
-If you're using a Unix based system, execute the following commands in the root directory of the cloned repository:
+Now that you've got a copy of the code, you can build it by running a gradle command in the project's root directory.
+
+On Unix based systems:
 ```shell
 chmod +x gradlew
 ./gradlew cleanAllModules buildAllModules :app:buildRelease
 ```
 
-Otherwise if you're using Windows, run:
+On Windows:
 ```shell
 gradlew.bat cleanAllModules buildAllModules :app:buildRelease
 ```
