@@ -142,5 +142,46 @@ The reactive API is compatible with Java 1.8 and up.
 ## Compatibility between APIs
 The standard API and the reactive API produce the same results given the same inputs, therefore the APIs can be used interchangably without migration/conversion.
 
-## GUI
-Currently in development.
+## GUI app
+The GUI app provides a simple way to use Shamir's Secret Sharing.
+
+<img src="https://i.imgur.com/qt8NAGU.png" width="500">
+
+### Usage
+The GUI app is still in development so has not yet been released as a binary. To use it you'll need to build it from the source.
+
+Start by getting a copy of the develop branch. You can the download it from [Github](https://github.com/MatthewTamlin/Shamir/tree/develop) or clone it by running:
+```shell
+git clone -b develop https://github.com/MatthewTamlin/Shamir
+```
+
+Now that you've got a copy of the code, you can build it by running a gradle command in the project's root directory.
+
+On Unix based systems:
+```shell
+chmod +x gradlew
+./gradlew cleanAllModules buildAllModules :app:buildRelease
+```
+
+On Windows:
+```shell
+gradlew.bat cleanAllModules buildAllModules :app:buildRelease
+```
+
+The release will be deployed to `/app/build/distributions/app-$version.zip`. Unzip the release and run the binary to launch the GUI.
+
+### Limitations
+A 4096 bit prime is used as the basis of the finite field, therefore the GUI can only be used to share files which are less than 512 bytes long. To share larger files, first use a symmetric encryption protocol to encrypt the payload, and then use the GUI app to convert the key into shares. If you use a well-known protocol such as AES then there should be no problem distributing the encrypted data with each share.
+
+### Future work
+The next steps for the GUI app are:
+- Package the app for Windows, macOS and Linux.
+- Randomise the prime per installation.
+- Provide better descriptions when files are selected.
+- Encode the shares and the prime as base 64 strings when persisting them to the filesystem.
+
+### Disclaimer
+The GUI app is still in development and **must not** be used for production secrets. The format of the output files could change at any time until a production release is made, therefore backwards compatibility is not assured. While the cryptosystem has been unit and integration tested by the author, a thorough security testing has not been performed at the current time.
+
+## Licensing
+The APIs and the GUI app are licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
