@@ -25,6 +25,38 @@ sourceSets {
     }
   }
 }
+
+dependencies {
+  implementation project(':reactive-java-api')
+
+  implementation rootProject.ext.dependencies.javaUtilities
+
+  implementation rootProject.ext.dependencies.guava
+
+  implementation rootProject.ext.dependencies.rxJava.core
+
+  implementation rootProject.ext.dependencies.rxJava.rxjavafx
+
+  compileOnly rootProject.ext.dependencies.autoValue.core
+  apt rootProject.ext.dependencies.autoValue.core
+
+  implementation rootProject.ext.dependencies.dagger.jsr250
+  implementation rootProject.ext.dependencies.dagger.core
+  apt rootProject.ext.dependencies.dagger.processor
+
+  implementation rootProject.ext.dependencies.jsr305
+
+  implementation rootProject.ext.dependencies.gson
+
+  implementation rootProject.ext.dependencies.apacheCommons.io
+
+  testCompile rootProject.ext.dependencies.junit
+
+  testCompile rootProject.ext.dependencies.hamcrest
+
+  testCompile rootProject.ext.dependencies.mockito
+}
+
 jar {
   manifest {
     attributes "Main-Class": mainClassName
