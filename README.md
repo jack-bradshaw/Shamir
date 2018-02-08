@@ -145,7 +145,7 @@ The standard API and the reactive API produce the same results given the same in
 ## GUI app
 The GUI app provides a simple way to use Shamir's Secret Sharing.
 
-![screenshot =400x](https://i.imgur.com/qt8NAGU.png)
+![screenshot =200x](https://i.imgur.com/qt8NAGU.png)
 
 ### Usage
 The GUI app is still in development and has not yet been released as a binary, so you'll need to build it from the source.
