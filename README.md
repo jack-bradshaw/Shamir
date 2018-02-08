@@ -181,7 +181,7 @@ The next steps for the GUI app are:
 - Encode the shares and the prime as base 64 strings when persisting them to the filesystem.
 
 ### Disclaimer
-The GUI app is still in development and **must not** be used for production secrets. The format of the output files could change at any time until a production release is made, therefore backwards compatibility is not assured. While the cryptosystem has been unit and integration tested by the author, thorough security testing has not been performed at the current time.
+The GUI app is still in development and **must not** be used for production secrets. The format of the output files could change at any time until a production release is made, therefore backwards compatibility is not assured. While the cryptosystem has been unit and integration tested by the author, a thorough security testing has not been performed at the current time.
 
 ## Licensing
 The APIs and the GUI app are licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
