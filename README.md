@@ -150,7 +150,7 @@ The GUI app provides a simple way to use Shamir's Secret Sharing.
 ### Usage
 The GUI app is still in development so has not yet been released as a binary. To use it you'll need to build it from the source.
 
-Start by getting a copy of the develop branch. You can the download it from [Github](https://github.com/MatthewTamlin/Shamir/tree/develop) or clone it by running:
+Start by getting a copy of the develop branch. You can download it from [Github](https://github.com/MatthewTamlin/Shamir/tree/develop) or clone it by running:
 ```shell
 git clone -b develop https://github.com/MatthewTamlin/Shamir
 ```
@@ -171,7 +171,7 @@ gradlew.bat cleanAllModules buildAllModules :app:buildRelease
 The release will be deployed to `/app/build/distributions/app-$version.zip`. Unzip the release and run the binary to launch the GUI.
 
 ### Limitations
-A 4096 bit prime is used as the basis of the finite field, therefore the GUI can only be used to share files which are less than 512 bytes long. To share larger files, first use a symmetric encryption protocol to encrypt the payload, and then use the GUI app to convert the key into shares. If you use a well-known protocol such as AES then there should be no problem distributing the encrypted data with each share.
+A 4096 bit prime is used as the basis of the finite field, therefore the GUI can only be used to share files which are less than 512 bytes long. To share larger files, first use a symmetric encryption protocol to encrypt the payload, and then use the GUI app to convert the key into shares. If you use a well-known protocol such as AES then there should be no problem distributing the encrypted payload with each share.
 
 ### Future work
 The next steps for the GUI app are:
