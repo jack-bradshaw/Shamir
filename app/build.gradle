@@ -1,5 +1,29 @@
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'idea'
+apply plugin: 'edu.sc.seis.launch4j'
+
+version = '0.0.0'
 
 sourceCompatibility = 1.8
+
+mainClassName = 'com.matthewtamlin.shamir.app.App'
+
+// This plugin must be applied after defining the main class
+apply plugin: 'com.github.johnrengelman.shadow'
+
+jar {
+  manifest {
+    attributes "Main-Class": mainClassName
+  }
+}
+
+shadowJar {
+  archiveName = "shadowjar.${extension}"
+}
+
+task buildRelease(dependsOn: 'shadowJar') {
+  doLast {
+    println "Release \'app:$version\' can be found at ${buildDir}/app-${version}/build/distributions/app-${version}.zip"
+  }
+}
