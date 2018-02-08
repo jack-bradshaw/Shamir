@@ -143,11 +143,13 @@ The reactive API is compatible with Java 1.8 and up.
 The standard API and the reactive API produce the same results given the same inputs, therefore the APIs can be used interchangably without migration/conversion.
 
 ## GUI app
-The GUI app provides a simple way to use Shamir's Secret Sharing. The GUI app is still in development and has not yet been released as a binary, so you'll need to build it from the source.
+The GUI app provides a simple way to use Shamir's Secret Sharing.
 
 ![screenshot](https://i.imgur.com/qt8NAGU.png)
 
-### Launching the GUI
+### Usage
+The GUI app is still in development and has not yet been released as a binary, so you'll need to build it from the source.
+
 Start by cloning the repository locally, then run the following command in the root directory of the project.
 
 On Unix based systems:
