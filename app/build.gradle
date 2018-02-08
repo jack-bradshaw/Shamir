@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'idea'
+apply plugin: 'net.ltgt.apt'
 apply plugin: 'edu.sc.seis.launch4j'
 
 version = '0.0.0'
