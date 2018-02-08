@@ -12,6 +12,18 @@ mainClassName = 'com.matthewtamlin.shamir.app.App'
 // This plugin must be applied after defining the main class
 apply plugin: 'com.github.johnrengelman.shadow'
 
+sourceSets {
+  main {
+    java {
+      srcDirs = ['src/main/java']
+    }
+
+    resources {
+      srcDirs = ['src/main/resources']
+      includes = ['**/*.fxml', '**/*.png', '**/*.json', '**/*.ico']
+    }
+  }
+}
 jar {
   manifest {
     attributes "Main-Class": mainClassName
