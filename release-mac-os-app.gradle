@@ -1,0 +1,41 @@
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'edu.sc.seis.macAppBundle'
+
+jar {
+  manifest {
+    attributes "Main-Class": project.ext.mainClassName
+  }
+}
+
+shadowJar {
+  archiveName = "app-shadowjar.jar"
+}
+
+macAppBundle {
+  mainClassName = project.ext.mainClassName
+  runtimeConfigurationName = 'shadow'
+  jarTask = 'shadowJar'
+
+  appName = project.ext.appName
+  icon = project.ext.macOsIconPath
+
+  bundleJRE = true
+  jreHome = project.projectDir.getAbsolutePath() + '/JRE/mac-os'
+}
+
+task buildRelease(group: 'release') {
+  doFirst {
+    final File jre = new File(project.projectDir, 'deployment/JREs/mac-os')
+
+    if (!jre.exists()) {
+      throw new RuntimeException("MacOS JRE does not exist. Put JRE home in ${jre.getAbsolutePath()}.")
+    }
+  }
+}
+
+buildRelease.finalizedBy('createApp')
+
+createApp.doLast {
+  println "Release \'app\' can be found at ${project.buildDir.getAbsolutePath()}/" +
+      "${macAppBundle.appOutputDir}/${macAppBundle.appName}.app"
+}
