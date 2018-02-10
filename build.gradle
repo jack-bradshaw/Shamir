@@ -3,6 +3,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '2.0.2' apply false
     id 'org.ajoberstar.grgit' version '2.1.0' apply false
     id 'edu.sc.seis.launch4j' version '2.4.2' apply false
+    id 'edu.sc.seis.macAppBundle' version '2.2.0' apply false
 }
 
 group 'com.matthew-tamlin'
