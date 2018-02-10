@@ -2,16 +2,17 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'idea'
 apply plugin: 'net.ltgt.apt'
-apply plugin: 'edu.sc.seis.launch4j'
+apply plugin: 'com.github.johnrengelman.shadow'
 
-version = '0.0.0'
+ext.appName = 'Shamir'
+ext.version = '0.0.0'
+
+ext.mainClassName = 'com.matthewtamlin.shamir.app.App'
+
+ext.macOsIconPath = project.projectDir.getAbsolutePath() + '/deployment/resources/mac-os/icon.icns'
+ext.macOsBundle = 'com.matthewtamlin.shamir'
 
 sourceCompatibility = 1.8
-
-mainClassName = 'com.matthewtamlin.shamir.app.App'
-
-// This plugin must be applied after defining the main class
-apply plugin: 'com.github.johnrengelman.shadow'
 
 sourceSets {
   main {
@@ -57,18 +58,4 @@ dependencies {
   testCompile rootProject.ext.dependencies.mockito
 }
 
-jar {
-  manifest {
-    attributes "Main-Class": mainClassName
-  }
-}
-
-shadowJar {
-  archiveName = "shadowjar.${extension}"
-}
-
-task buildRelease(dependsOn: 'shadowJar') {
-  doLast {
-    println "Release \'app:$version\' can be found at ${buildDir}/app-${version}/build/distributions/app-${version}.zip"
-  }
-}
+apply from: rootProject.file('release-mac-os-app.gradle')
