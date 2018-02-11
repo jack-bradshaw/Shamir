@@ -21,77 +21,77 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  * {@link #create(SecureRandom)} static method.
  */
 public class Shamir {
-    private final RxShamir rxShamir;
+  private final RxShamir rxShamir;
+  
+  /**
+   * Constructs a new Shamir.
+   * <p>
+   * The {@link #create(SecureRandom)} static method is provided as an alternative to this constructor.
+   *
+   * @param random
+   *     the random source to use in the cryptographic operations, not null
+   */
+  public Shamir(@Nonnull final SecureRandom random) {
+    checkNotNull(random, "\'random\' must not be null.");
     
-    /**
-     * Constructs a new Shamir.
-     * <p>
-     * The {@link #create(SecureRandom)} static method is provided as an alternative to this constructor.
-     *
-     * @param random
-     *         the random source to use in the cryptographic operations, not null
-     */
-    public Shamir(@Nonnull final SecureRandom random) {
-        checkNotNull(random, "\'random\' must not be null.");
-        
-        rxShamir = RxShamir.create(random);
-    }
-    
-    /**
-     * Constructs a new Shamir.
-     * <p>
-     * The {@link #Shamir(SecureRandom)} constructor is provided as an alternative to this method.
-     *
-     * @param random
-     *         the random source to use in the cryptographic operations, not null
-     */
-    @Nonnull
-    public static Shamir create(@Nonnull final SecureRandom random) {
-        return new Shamir(random);
-    }
-    
-    /**
-     * Splits a secret into a set of shares using Shamir's Secret Sharing.
-     *
-     * @param secret
-     *         the secret to share, not null
-     * @param creationScheme
-     *         defines the sharing configuration, not null
-     *
-     * @return the shares, not null, not containing null
-     *
-     * @throws IllegalStateException
-     *         if the secret is not less than the prime specified in the creation scheme
-     */
-    @Nonnull
-    public Set<Share> createShares(@Nonnull final BigInteger secret, @Nonnull final CreationScheme creationScheme) {
-        return rxShamir
-                .createShares(secret, creationScheme)
-                .collectInto(new HashSet<Share>(), Set::add)
-                .blockingGet();
-    }
-    
-    /**
-     * Recovers a secret from a set of shares using Shamir's Secret Sharing.
-     *
-     * @param shares
-     *         the shares to reconstruct the secret from, not null, not containing null
-     * @param recoveryScheme
-     *         defines the recovery configuration, not null
-     *
-     * @return the recovered secret, not null
-     *
-     * @throws IllegalStateException
-     *         if two or more shares have the same index
-     * @throws IllegalStateException
-     *         if the number of shares is less than the required share count specified in the recovery scheme
-     * @throws IllegalStateException
-     *         if the index of any share is greater than or equal to the prime specified in the recovery scheme
-     * @throws IllegalStateException
-     *         if the value of any share is greater than or equal to the prime specified in the recovery scheme
-     */
-    @Nonnull
-    public BigInteger recoverSecret(@Nonnull final Set<Share> shares, @Nonnull final RecoveryScheme recoveryScheme) {
-        return rxShamir.recoverSecret(shares, recoveryScheme).blockingGet();
-    }
+    rxShamir = RxShamir.create(random);
+  }
+  
+  /**
+   * Constructs a new Shamir.
+   * <p>
+   * The {@link #Shamir(SecureRandom)} constructor is provided as an alternative to this method.
+   *
+   * @param random
+   *     the random source to use in the cryptographic operations, not null
+   */
+  @Nonnull
+  public static Shamir create(@Nonnull final SecureRandom random) {
+    return new Shamir(random);
+  }
+  
+  /**
+   * Splits a secret into a set of shares using Shamir's Secret Sharing.
+   *
+   * @param secret
+   *     the secret to share, not null
+   * @param creationScheme
+   *     defines the sharing configuration, not null
+   *
+   * @return the shares, not null, not containing null
+   *
+   * @throws IllegalStateException
+   *     if the secret is not less than the prime specified in the creation scheme
+   */
+  @Nonnull
+  public Set<Share> createShares(@Nonnull final BigInteger secret, @Nonnull final CreationScheme creationScheme) {
+    return rxShamir
+        .createShares(secret, creationScheme)
+        .collectInto(new HashSet<Share>(), Set::add)
+        .blockingGet();
+  }
+  
+  /**
+   * Recovers a secret from a set of shares using Shamir's Secret Sharing.
+   *
+   * @param shares
+   *     the shares to reconstruct the secret from, not null, not containing null
+   * @param recoveryScheme
+   *     defines the recovery configuration, not null
+   *
+   * @return the recovered secret, not null
+   *
+   * @throws IllegalStateException
+   *     if two or more shares have the same index
+   * @throws IllegalStateException
+   *     if the number of shares is less than the required share count specified in the recovery scheme
+   * @throws IllegalStateException
+   *     if the index of any share is greater than or equal to the prime specified in the recovery scheme
+   * @throws IllegalStateException
+   *     if the value of any share is greater than or equal to the prime specified in the recovery scheme
+   */
+  @Nonnull
+  public BigInteger recoverSecret(@Nonnull final Set<Share> shares, @Nonnull final RecoveryScheme recoveryScheme) {
+    return rxShamir.recoverSecret(shares, recoveryScheme).blockingGet();
+  }
 }
