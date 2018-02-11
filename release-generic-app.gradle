@@ -1,15 +1,3 @@
-apply plugin: 'com.github.johnrengelman.shadow'
-
-jar {
-  manifest {
-    attributes "Main-Class": project.mainClassName
-  }
-}
-
-shadowJar {
-  archiveName = "generic-release.jar"
-}
-
 task buildGenericRelease(group: 'release') {
   doFirst {
     final File jre = new File(project.projectDir, 'deployment/JREs/mac-os')
