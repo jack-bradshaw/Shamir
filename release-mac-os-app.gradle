@@ -3,7 +3,7 @@ apply plugin: 'edu.sc.seis.macAppBundle'
 
 jar {
   manifest {
-    attributes "Main-Class": project.ext.mainClassName
+    attributes "Main-Class": project.mainClassName
   }
 }
 
@@ -12,7 +12,7 @@ shadowJar {
 }
 
 macAppBundle {
-  mainClassName = project.ext.mainClassName
+  mainClassName = project.mainClassName
   runtimeConfigurationName = 'shadow'
   jarTask = 'shadowJar'
 
