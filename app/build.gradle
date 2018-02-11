@@ -70,7 +70,7 @@ ext.macOsReleaseVersion = '1.0.0'
 ext.macOsIconPath = project.projectDir.getAbsolutePath() + '/deployment/resources/mac-os/icon.icns'
 ext.macOsBundle = 'com.matthewtamlin.shamir'
 
-ext.windowsReleaseVersion = '0.0.0'
+ext.windowsReleaseVersion = '1.0.0'
 ext.windowsIconPath = project.projectDir.getAbsolutePath() + '/deployment/resources/windows/icon.ico'
 
 apply from: rootProject.file('release-mac-os-app.gradle')
