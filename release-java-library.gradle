@@ -7,94 +7,94 @@ apply plugin: 'maven'
 def localReleaseDirectory = "${buildDir}/release/${project.version}"
 
 task zipRelease(type: Zip) {
-    from localReleaseDirectory
-    destinationDir buildDir
-    archiveName "release-${version}.zip"
+  from localReleaseDirectory
+  destinationDir buildDir
+  archiveName "release-${version}.zip"
 }
 
 task buildRelease(dependsOn: ['uploadArchives', 'zipRelease']) {
-    doLast {
-        println "Release \'$project.group:$project.ext.artifactId:$version\' can be found at ${localReleaseDirectory}/"
-    }
+  doLast {
+    println "Release \'$project.group:$project.ext.artifactId:$version\' can be found at ${localReleaseDirectory}/"
+  }
 }
 
 afterEvaluate { project ->
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                repository(url: "file://${localReleaseDirectory}")
+  uploadArchives {
+    repositories {
+      mavenDeployer {
+        repository(url: "file://${localReleaseDirectory}")
 
-                pom.groupId = project.group
-                pom.artifactId = project.ext.artifactId
-                pom.version = project.version
+        pom.groupId = project.group
+        pom.artifactId = project.ext.artifactId
+        pom.version = project.version
 
-                pom.project {
-                    name project.ext.name
-                    packaging 'jar'
-                    description project.ext.description
-                    url project.ext.url
+        pom.project {
+          name project.ext.name
+          packaging 'jar'
+          description project.ext.description
+          url project.ext.url
 
-                    licenses {
-                        license {
-                            name project.ext.license.name
-                            url project.ext.license.url
-                        }
-                    }
-
-                    scm {
-                        url project.ext.url
-                    }
-                }
+          licenses {
+            license {
+              name project.ext.license.name
+              url project.ext.license.url
             }
+          }
+
+          scm {
+            url project.ext.url
+          }
         }
+      }
     }
+  }
 
-    install {
-        repositories.mavenInstaller {
-            pom.groupId = project.group
-            pom.artifactId = project.artifactId
-            pom.version = project.version
+  install {
+    repositories.mavenInstaller {
+      pom.groupId = project.group
+      pom.artifactId = project.artifactId
+      pom.version = project.version
 
-            pom.project {
-                name project.ext.name
-                packaging 'jar'
-                description project.ext.description
-                url project.ext.url
+      pom.project {
+        name project.ext.name
+        packaging 'jar'
+        description project.ext.description
+        url project.ext.url
 
-                licenses {
-                    license {
-                        name project.ext.license.name
-                        url project.ext.license.url
-                    }
-                }
-
-                scm {
-                    url project.ext.url
-                }
-            }
+        licenses {
+          license {
+            name project.ext.license.name
+            url project.ext.license.url
+          }
         }
-    }
 
-    task sourcesJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-
-    task javadocJar(type: Jar, dependsOn: javadoc) {
-        classifier = 'javadoc'
-        from javadoc.destinationDir
-    }
-
-    if (JavaVersion.current().isJava8Compatible()) {
-        allprojects {
-            tasks.withType(Javadoc) {
-                options.addStringOption('Xdoclint:none', '-quiet')
-            }
+        scm {
+          url project.ext.url
         }
+      }
     }
+  }
 
-    artifacts {
-        archives sourcesJar
-        archives javadocJar
+  task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+  }
+
+  task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+  }
+
+  if (JavaVersion.current().isJava8Compatible()) {
+    allprojects {
+      tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+      }
     }
+  }
+
+  artifacts {
+    archives sourcesJar
+    archives javadocJar
+  }
 }
