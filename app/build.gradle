@@ -52,6 +52,16 @@ dependencies {
   testCompile rootProject.ext.dependencies.mockito
 }
 
+jar {
+  manifest {
+    attributes "Main-Class": project.mainClassName
+  }
+}
+
+shadowJar {
+  archiveName = "shadowjar.jar"
+}
+
 ext.appName = 'Shamir'
 
 ext.genericReleaseVersion = '0.0.0'
