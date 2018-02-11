@@ -4,10 +4,10 @@ apply plugin: 'idea'
 apply plugin: 'net.ltgt.apt'
 apply plugin: 'com.github.johnrengelman.shadow'
 
+mainClassName = 'com.matthewtamlin.shamir.app.App'
+
 ext.appName = 'Shamir'
 ext.version = '0.0.0'
-
-ext.mainClassName = 'com.matthewtamlin.shamir.app.App'
 
 ext.macOsIconPath = project.projectDir.getAbsolutePath() + '/deployment/resources/mac-os/icon.icns'
 ext.macOsBundle = 'com.matthewtamlin.shamir'
