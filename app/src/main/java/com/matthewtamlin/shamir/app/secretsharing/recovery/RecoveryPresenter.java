@@ -115,8 +115,9 @@ public class RecoveryPresenter {
     
     disposables.add(shareFilePathsAreSet
         .observeOn(viewScheduler)
-        .flatMapCompletable(
-            isSet -> isSet ? view.enableClearSelectedShareFilesButton() : view.disableClearSelectedShareFilesButton())
+        .flatMapCompletable(isSet -> isSet ?
+            view.enableClearSelectedShareFilesButton() :
+            view.disableClearSelectedShareFilesButton())
         .subscribe());
     
     disposables.add(recoverySchemeFilePathIsSet
