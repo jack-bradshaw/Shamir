@@ -16,111 +16,110 @@ import java.math.BigInteger;
  */
 @AutoValue
 public abstract class Share {
+  /**
+   * @return the index of the share, not null
+   */
+  @SerializedName("index")
+  public abstract BigInteger getIndex();
+  
+  /**
+   * @return the value of the share, not null
+   */
+  @SerializedName("value")
+  public abstract BigInteger getValue();
+  
+  /**
+   * @return a new {@link Builder}
+   */
+  @Nonnull
+  public static Builder builder() {
+    return new $AutoValue_Share.Builder();
+  }
+  
+  /**
+   * Creates a type adapter for serialising this class with Gson.
+   *
+   * @param gson
+   *     a Gson instance, not null
+   *
+   * @return the type adapter, not null
+   */
+  @Nonnull
+  public static TypeAdapter<Share> typeAdapter(@Nonnull final Gson gson) {
+    return new AutoValue_Share.GsonTypeAdapter(gson);
+  }
+  
+  /**
+   * Builder class for the {@link Share} class.
+   */
+  @AutoValue.Builder
+  public static abstract class Builder {
     /**
-     * @return the index of the share, not null
+     * Sets the index of this share. The index must be: <ul><li>Not null.</li><li>Greater than or equal to 1.</li></ul>
+     *
+     * @param index
+     *     the index, not null
+     *
+     * @return this builder, not null
      */
-    @SerializedName("index")
-    public abstract BigInteger getIndex();
+    public abstract Builder setIndex(BigInteger index);
     
     /**
-     * @return the value of the share, not null
+     * Sets the value of this share. The value must not be null.
+     *
+     * @param value
+     *     the value, not null
+     *
+     * @return this builder, not null
      */
-    @SerializedName("value")
-    public abstract BigInteger getValue();
+    public abstract Builder setValue(BigInteger value);
+    
+    abstract Share autoBuild();
     
     /**
-     * @return a new {@link Builder}
+     * Sets the index of this share. The index must be greater than or equal to 1.
+     *
+     * @param index
+     *     the index
+     *
+     * @return this builder, not null
      */
     @Nonnull
-    public static Builder builder() {
-        return new $AutoValue_Share.Builder();
+    public Builder setIndex(final long index) {
+      return setIndex(BigInteger.valueOf(index));
     }
     
     /**
-     * Creates a type adapter for serialising this class with Gson.
+     * Sets the value of this share.
      *
-     * @param gson
-     *         a Gson instance, not null
+     * @param value
+     *     the value
      *
-     * @return the type adapter, not null
+     * @return this builder, not null
      */
     @Nonnull
-    public static TypeAdapter<Share> typeAdapter(@Nonnull final Gson gson) {
-        return new AutoValue_Share.GsonTypeAdapter(gson);
+    public Builder setValue(final long value) {
+      return setValue(BigInteger.valueOf(value));
     }
     
     /**
-     * Builder class for the {@link Share} class.
+     * Constructs a {@link Share} based on this builder. This method will fail if any of the properties were never
+     * set or were set to invalid values (see the documentation of each method for specifics).
+     *
+     * @return a Share based on this builder, not null
+     *
+     * @throws IllegalStateException
+     *     if any of the values are missing or invalid
      */
-    @AutoValue.Builder
-    public static abstract class Builder {
-        /**
-         * Sets the index of this share. The index must be: <ul><li>Not null.</li><li>Greater than or equal to
-         * 1.</li></ul>
-         *
-         * @param index
-         *         the index, not null
-         *
-         * @return this builder, not null
-         */
-        public abstract Builder setIndex(BigInteger index);
-        
-        /**
-         * Sets the value of this share. The value must not be null.
-         *
-         * @param value
-         *         the value, not null
-         *
-         * @return this builder, not null
-         */
-        public abstract Builder setValue(BigInteger value);
-        
-        abstract Share autoBuild();
-        
-        /**
-         * Sets the index of this share. The index must be greater than or equal to 1.
-         *
-         * @param index
-         *         the index
-         *
-         * @return this builder, not null
-         */
-        @Nonnull
-        public Builder setIndex(final long index) {
-            return setIndex(BigInteger.valueOf(index));
-        }
-        
-        /**
-         * Sets the value of this share.
-         *
-         * @param value
-         *         the value
-         *
-         * @return this builder, not null
-         */
-        @Nonnull
-        public Builder setValue(final long value) {
-            return setValue(BigInteger.valueOf(value));
-        }
-        
-        /**
-         * Constructs a {@link Share} based on this builder. This method will fail if any of the properties were never
-         * set or were set to invalid values (see the documentation of each method for specifics).
-         *
-         * @return a Share based on this builder, not null
-         *
-         * @throws IllegalStateException
-         *         if any of the values are missing or invalid
-         */
-        @Nonnull
-        public Share build() {
-            final Share share = autoBuild();
-            
-            if (share.getIndex().compareTo(BigInteger.ONE) < 0) {
-                throw new IllegalStateException("The index must be at least 1.");
-            }
-            
-            return share;
-        }
+    @Nonnull
+    public Share build() {
+      final Share share = autoBuild();
+      
+      if (share.getIndex().compareTo(BigInteger.ONE) < 0) {
+        throw new IllegalStateException("The index must be at least 1.");
+      }
+      
+      return share;
     }
+  }
 }

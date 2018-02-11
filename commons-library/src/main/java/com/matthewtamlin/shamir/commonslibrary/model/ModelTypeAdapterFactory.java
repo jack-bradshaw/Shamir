@@ -11,22 +11,22 @@ import javax.annotation.Nonnull;
  * Gson TypeAdapterFactory for all classes in the {@link com.matthewtamlin.shamir.commonslibrary.model} package.
  */
 public class ModelTypeAdapterFactory implements TypeAdapterFactory {
-    @Override
-    @SuppressWarnings("unchecked")
-    public <T> TypeAdapter<T> create(@Nonnull final Gson gson, @Nonnull final TypeToken<T> type) {
-        final Class<T> rawType = (Class<T>) type.getRawType();
-        
-        if (CreationScheme.class.isAssignableFrom(rawType)) {
-            return (TypeAdapter<T>) CreationScheme.typeAdapter(gson);
-            
-        } else if (RecoveryScheme.class.isAssignableFrom(rawType)) {
-            return (TypeAdapter<T>) RecoveryScheme.typeAdapter(gson);
-            
-        } else if (Share.class.isAssignableFrom(rawType)) {
-            return (TypeAdapter<T>) Share.typeAdapter(gson);
-            
-        } else {
-            return null;
-        }
+  @Override
+  @SuppressWarnings("unchecked")
+  public <T> TypeAdapter<T> create(@Nonnull final Gson gson, @Nonnull final TypeToken<T> type) {
+    final Class<T> rawType = (Class<T>) type.getRawType();
+    
+    if (CreationScheme.class.isAssignableFrom(rawType)) {
+      return (TypeAdapter<T>) CreationScheme.typeAdapter(gson);
+      
+    } else if (RecoveryScheme.class.isAssignableFrom(rawType)) {
+      return (TypeAdapter<T>) RecoveryScheme.typeAdapter(gson);
+      
+    } else if (Share.class.isAssignableFrom(rawType)) {
+      return (TypeAdapter<T>) Share.typeAdapter(gson);
+      
+    } else {
+      return null;
     }
+  }
 }
