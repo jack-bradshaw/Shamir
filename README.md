@@ -148,7 +148,12 @@ The GUI app provides a simple way to use Shamir's Secret Sharing.
 <img src="https://i.imgur.com/qt8NAGU.png" width="500">
 
 ### Download
-Native packages are available for MacOS and Windows, and a JAR is available for all other cases. The releases are available [here](https://github.com/MatthewTamlin/Shamir/releases).
+Native packages are available for MacOS and Windows, and a JAR is available for all other cases.
+
+Latest releases:
+- [MacOS](https://github.com/MatthewTamlin/Shamir/releases/tag/mac-os-app-v1.0.0).
+- [Windows](https://github.com/MatthewTamlin/Shamir/releases/tag/windows-app-v1.0.0).
+- JAR
 
 Each releases is PGP signed for security, and the signer's public key can be found [here](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xA1A2F30F3885AE92).
 
