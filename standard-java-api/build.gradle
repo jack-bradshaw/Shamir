@@ -10,27 +10,27 @@ version = '2.0.1'
 sourceCompatibility = 1.8
 
 sourceSets {
-    main {
-        java {
-            srcDirs = ['src/main/java', 'out/production/classes/generated']
-        }
+  main {
+    java {
+      srcDirs = ['src/main/java', 'out/production/classes/generated']
     }
+  }
 }
 
 dependencies {
-    api project(':commons-library')
+  api project(':commons-library')
 
-    implementation project(':reactive-java-api')
+  implementation project(':reactive-java-api')
 
-    implementation rootProject.ext.dependencies.javaUtilities
+  implementation rootProject.ext.dependencies.javaUtilities
 
-    implementation rootProject.ext.dependencies.guava
+  implementation rootProject.ext.dependencies.guava
 
-    api rootProject.ext.dependencies.jsr305
+  api rootProject.ext.dependencies.jsr305
 
-    testCompile rootProject.ext.dependencies.junit
+  testCompile rootProject.ext.dependencies.junit
 
-    testCompile rootProject.ext.dependencies.hamcrest
+  testCompile rootProject.ext.dependencies.hamcrest
 }
 
 ext.name = 'Shamir'
@@ -38,7 +38,7 @@ ext.description = 'A Java implementation of Shamir\'s Secret Sharing.'
 ext.url = 'https://github.com/MatthewTamlin/Shamir'
 ext.sourceControlUrl = 'https://github.com/MatthewTamlin/Shamir'
 ext.license = [
-        name: 'The Apache Software License, Version 2.0',
-        url: 'https://www.apache.org/licenses/LICENSE-2.0.txt']
+    name: 'The Apache Software License, Version 2.0',
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.txt']
 
 apply from: rootProject.file('release-java-library.gradle')
