@@ -12,6 +12,8 @@ ext.version = '0.0.0'
 ext.macOsIconPath = project.projectDir.getAbsolutePath() + '/deployment/resources/mac-os/icon.icns'
 ext.macOsBundle = 'com.matthewtamlin.shamir'
 
+ext.windowsIconPath = project.projectDir.getAbsolutePath() + '/deployment/resources/windows/icon.ico'
+
 sourceCompatibility = 1.8
 
 sourceSets {
@@ -59,3 +61,5 @@ dependencies {
 }
 
 apply from: rootProject.file('release-mac-os-app.gradle')
+apply from: rootProject.file('release-windows-app.gradle')
+apply from: rootProject.file('release-generic-app.gradle')
