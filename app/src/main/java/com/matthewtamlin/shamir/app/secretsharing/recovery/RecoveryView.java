@@ -264,4 +264,14 @@ public class RecoveryView extends StackPane {
       controlsContainer.setDisable(false);
     });
   }
+  
+  //TODO
+  public Completable showSelectedShareCount(final int selectedShareCount) {
+    return Completable.never();
+  }
+  
+  //TODO
+  public Completable hideSelectedShareCount() {
+    return Completable.never();
+  }
 }
