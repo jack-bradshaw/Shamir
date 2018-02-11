@@ -1,6 +1,5 @@
 package com.matthewtamlin.shamir.app.files;
 
-import com.matthewtamlin.shamir.app.files.RxFiles;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
