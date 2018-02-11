@@ -187,7 +187,6 @@ A 4096 bit prime is used as the basis of the finite field, therefore the GUI can
 
 ### Future work
 The next steps for the GUI app are:
-- Package the app for Windows and Linux.
 - Randomise the prime per installation.
 - Provide better descriptions when files are selected.
 
