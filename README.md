@@ -165,11 +165,10 @@ Start by getting a copy of the master branch. You can download it from [Github](
 git clone -b develop https://github.com/MatthewTamlin/Shamir
 ```
 
-The native releases for Windows and MacOS come bundled with a minified JRE, however for technical and legal reasons the JREs aren't included in this repository. To install the JREs:
+The native releases for MacOS and Windows come bundled with a minified JRE, however for technical and legal reasons the JREs aren't included in this repository. To install the JREs:
 - Download the MacOS and Windows TAR releases from [here](http://www.oracle.com/technetwork/java/javase/downloads/jre9-downloads-3848532.html)
 - Unzip the MacOS JRE and copy the contents of the unzipped `Home` directory to `/app/deployment/JREs/macos`.
 - Unzip the windows JRE to `/app/deployment/JREs/windows`.
-
 
 Next open the command line in the repository's root directory and run the following commands:
 ```shell
@@ -181,7 +180,7 @@ chmod +x gradlew
 gradlew.bat cleanAllModules buildAllModules :app:buildAllReleases
 ```
 
-The releases will be deployed to the relevant subdirectories of `/app/build/`.
+The releases can be found in the relevant subdirectories of `/app/build/`.
 
 ### Limitations
 A 4096 bit prime is used as the basis of the finite field, therefore the GUI can only be used to share files which are less than 512 bytes long. To share larger files, first use a symmetric encryption protocol to encrypt the payload, and then use the GUI app to convert the key into shares. If you use a well-known protocol such as AES then there should be no problem distributing the encrypted payload with each share.
