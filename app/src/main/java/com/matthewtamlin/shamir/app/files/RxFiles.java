@@ -71,6 +71,16 @@ public class RxFiles {
                     Completable.error(makeError("Failed to create file", file, "The parent directory does not exist"))));
   }
   
+  @Nonnull
+  public Completable delete(@Nonnull final File file) {
+    checkNotNull(file, "\'file\' must not be null.");
+    
+    return exists(file)
+        .flatMapCompletable(exists -> exists ?
+            Completable.fromAction(() -> FileUtils.forceDelete(file)) :
+            Completable.complete());
+  }
+  
   /**
    * Lists the files in the supplied directory. The operation will fail if the directory does not exist, cannot be
    * accessed, or is actually a file.
