@@ -42,8 +42,6 @@ task buildAllReleases(dependsOn: [
         ':commons-library:buildRelease',
         ':standard-java-api:buildRelease',
         ':reactive-java-api:buildRelease',
-        ':app:buildMacOsRelease',
-        ':app:buildWindowsRelease',
-        ':app:buildGenericRelease'])
+        ':app:buildAllReleases'])
 
 apply from: 'dependencies.gradle'
