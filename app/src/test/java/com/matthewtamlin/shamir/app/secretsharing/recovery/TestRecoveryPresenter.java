@@ -275,19 +275,8 @@ public class TestRecoveryPresenter {
     verify(mockView, never()).enableClearSelectedShareFilesButton();
     verify(mockView, once()).disableClearSelectedShareFilesButton();
     
-    verifyNoFilesystemInteractions();
-  }
-  
-  @Test
-  public void testEventResponse_shareFilePathsChanged_setToSingleFile() {
-    presenter.startPresenting().blockingGet();
-    
-    shareFilePathsObservable.onNext(Optional.of(getShareFilePaths()));
-    
-    verify(mockView, never()).disableRecoverSecretRequests();
-    
-    verify(mockView, once()).enableClearSelectedShareFilesButton();
-    verify(mockView, never()).disableClearSelectedShareFilesButton();
+    verify(mockView, never()).showSelectedShareCount(anyInt());
+    verify(mockView, once()).hideSelectedShareCount();
     
     verifyNoFilesystemInteractions();
   }
@@ -308,7 +297,10 @@ public class TestRecoveryPresenter {
     
     verify(mockView, once()).enableClearSelectedShareFilesButton();
     verify(mockView, never()).disableClearSelectedShareFilesButton();
-    
+  
+    verify(mockView, once()).showSelectedShareCount(shareFiles.size());
+    verify(mockView, never()).hideSelectedShareCount();
+  
     verifyNoFilesystemInteractions();
   }
   
