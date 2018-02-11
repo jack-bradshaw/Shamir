@@ -62,3 +62,4 @@ dependencies {
 
 apply from: rootProject.file('release-mac-os-app.gradle')
 apply from: rootProject.file('release-windows-app.gradle')
+apply from: rootProject.file('release-generic-app.gradle')
