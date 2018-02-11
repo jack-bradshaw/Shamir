@@ -31,7 +31,7 @@ public class SerialisationModule {
   
   @Provides
   @SecretSharingScope
-  public RecoverySchemeSerialiser provideRecoverySchemeSerialiser(final Gson gson) {
-    return new JsonRecoverySchemeSerialiser(gson);
+  public RecoverySchemeSerialiser provideRecoverySchemeSerialiser() {
+    return new JsonRecoverySchemeSerialiser();
   }
 }
