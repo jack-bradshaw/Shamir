@@ -25,8 +25,8 @@ public class SerialisationModule {
   
   @Provides
   @SecretSharingScope
-  public ShareSerialiser provideShareSerialiser(final Gson gson) {
-    return new JsonShareSerialiser(gson);
+  public ShareSerialiser provideShareSerialiser() {
+    return new JsonShareSerialiser();
   }
   
   @Provides
