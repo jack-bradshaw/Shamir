@@ -23,7 +23,7 @@ macAppBundle {
   jreHome = project.projectDir.getAbsolutePath() + '/JRE/mac-os'
 }
 
-task buildRelease(group: 'release') {
+task buildMacOsRelease(group: 'release') {
   doFirst {
     final File jre = new File(project.projectDir, 'deployment/JREs/mac-os')
 
@@ -33,7 +33,7 @@ task buildRelease(group: 'release') {
   }
 }
 
-buildRelease.finalizedBy(createApp)
+buildMacOsRelease.finalizedBy(createApp)
 
 createApp.doLast {
   println "Native MacOS app release can be found at ${project.buildDir.getAbsolutePath()}/" +
