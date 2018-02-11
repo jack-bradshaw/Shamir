@@ -5,6 +5,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +27,8 @@ public class RxMocks {
     when(recoveryView.disableClearSelectedOutputDirectoryButton()).thenReturn(Completable.never());
     when(recoveryView.showRecoveryInProgress()).thenReturn(Completable.never());
     when(recoveryView.showRecoveryNotInProgress()).thenReturn(Completable.never());
+    when(recoveryView.showSelectedShareCount(anyInt())).thenReturn(Completable.never());
+    when(recoveryView.hideSelectedShareCount()).thenReturn(Completable.never());
     
     return recoveryView;
   }
