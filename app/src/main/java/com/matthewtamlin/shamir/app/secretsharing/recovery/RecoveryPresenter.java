@@ -120,6 +120,14 @@ public class RecoveryPresenter {
             view.disableClearSelectedShareFilesButton())
         .subscribe());
     
+    disposables.add(view
+        .observeShareFilePaths()
+        .observeOn(viewScheduler)
+        .flatMapCompletable(optionalFilePaths -> optionalFilePaths.isPresent() ?
+            view.showSelectedShareCount(optionalFilePaths.get().size()) :
+            view.hideSelectedShareCount())
+        .subscribe());
+    
     disposables.add(recoverySchemeFilePathIsSet
         .observeOn(viewScheduler)
         .flatMapCompletable(isSet ->
