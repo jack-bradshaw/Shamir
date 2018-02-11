@@ -1,0 +1,43 @@
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'edu.sc.seis.launch4j'
+
+jar {
+  manifest {
+    attributes "Main-Class": project.mainClassName
+  }
+}
+
+launch4j {
+  mainClassName = project.mainClassName
+
+  outfile = project.ext.appName + ".exe"
+
+  windowTitle = project.ext.appName
+  icon = project.ext.windowsIconPath
+
+  jar = shadowJar.archivePath.getAbsolutePath()
+
+  version = project.ext.windowsReleaseVersion
+  textVersion = project.ext.windowsReleaseVersion
+
+  bundledJrePath = project.projectDir.absolutePath + '/deployment/JREs/windows'
+  bundledJre64Bit = true
+
+}
+
+task buildWindowsRelease(group: 'release') {
+  doFirst {
+    final File jre = new File(project.projectDir, 'deployment/JREs/windows')
+
+    if (!jre.exists()) {
+      throw new RuntimeException("Windows JRE does not exist. Put JRE home in ${jre.getAbsolutePath()}.")
+    }
+  }
+}
+
+buildWindowsRelease.finalizedBy(createExe)
+createExe.dependsOn(shadowJar)
+
+createExe.doLast {
+  println "Native Windows app release can be found at ${createExe.outputDirectory}/${createExe.outfile}"
+}

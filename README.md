@@ -142,5 +142,53 @@ The reactive API is compatible with Java 1.8 and up.
 ## Compatibility between APIs
 The standard API and the reactive API produce the same results given the same inputs, therefore the APIs can be used interchangably without migration/conversion.
 
-## GUI
-Currently in development.
+## GUI app
+The GUI app provides a simple way to use Shamir's Secret Sharing.
+
+<img src="https://i.imgur.com/qt8NAGU.png" width="500">
+
+### Download
+Native packages are available for MacOS and Windows, and a JAR is available for all other cases. The releases are available [here](https://github.com/MatthewTamlin/Shamir/releases).
+
+Each releases is PGP signed for security, and the signer's public key can be found [here](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xA1A2F30F3885AE92).
+
+### Building from source
+You can also build the releases from the source for added security.
+
+Start by getting a copy of the master branch. You can download it from [Github](https://github.com/MatthewTamlin/Shamir/tree/master) or clone it by running:
+```shell
+git clone -b develop https://github.com/MatthewTamlin/Shamir
+```
+
+The native releases for Windows and MacOS come bundled with a minified JRE, however for technical and legal reasons the JREs aren't included in this repository. To install the JREs:
+- Download the MacOS and Windows TAR releases from [here](http://www.oracle.com/technetwork/java/javase/downloads/jre9-downloads-3848532.html)
+- Unzip the MacOS JRE and copy the contents of the unzipped `Home` directory to `/app/deployment/JREs/macos`.
+- Unzip the windows JRE to `/app/deployment/JREs/windows`.
+
+
+Next open the command line in the repository's root directory and run the following commands:
+```shell
+# On Unix style command lines
+chmod +x gradlew
+./gradlew cleanAllModules buildAllModules :app:buildAllReleases
+
+# On Windows
+gradlew.bat cleanAllModules buildAllModules :app:buildAllReleases
+```
+
+The releases will be deployed to the relevant subdirectories of `/app/build/`.
+
+### Limitations
+A 4096 bit prime is used as the basis of the finite field, therefore the GUI can only be used to share files which are less than 512 bytes long. To share larger files, first use a symmetric encryption protocol to encrypt the payload, and then use the GUI app to convert the key into shares. If you use a well-known protocol such as AES then there should be no problem distributing the encrypted payload with each share.
+
+### Future work
+The next steps for the GUI app are:
+- Package the app for Windows and Linux.
+- Randomise the prime per installation.
+- Provide better descriptions when files are selected.
+
+### Disclaimer
+The GUI app is still in development and **must not** be used for production secrets. The format of the output files could change at any time until a production release is made, therefore backwards compatibility is not assured. While the cryptosystem has been unit and integration tested by the author, a thorough external security audit has not been performed at the current time.
+
+## Licensing
+The APIs and the GUI app are licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.

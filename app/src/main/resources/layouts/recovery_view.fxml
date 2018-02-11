@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<StackPane style="-fx-background-color: #03A9F4 #03A9F4;" xmlns="http://javafx.com/javafx/9">
+    <children>
+        <HBox id="controls_container" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="171.0"
+              prefWidth="530.0" style="-fx-padding: 20; -fx-spacing: 20;">
+            <children>
+                <VBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="176.0" prefWidth="426.0" style="-fx-spacing: 16;">
+                    <children>
+                        <VBox prefHeight="200.0" prefWidth="256.0" style="-fx-spacing: 4;">
+                            <children>
+                                <Label id="share_files_label" prefHeight="17.0" prefWidth="326.0" textFill="WHITE">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Label>
+                                <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 10;">
+                                    <children>
+                                        <Button id="select_share_files_button" mnemonicParsing="false" prefHeight="27.0"
+                                                prefWidth="123.0"/>
+                                        <Button id="clear_share_files_button" mnemonicParsing="false" prefHeight="27.0"
+                                                prefWidth="123.0"/>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="256.0" style="-fx-spacing: 4;">
+                            <children>
+                                <Label id="recovery_scheme_file_label" prefHeight="17.0" prefWidth="326.0"
+                                       textFill="WHITE">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Label>
+                                <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 10;">
+                                    <children>
+                                        <Button id="select_recovery_scheme_file_button" mnemonicParsing="false"
+                                                prefHeight="27.0" prefWidth="123.0"/>
+                                        <Button id="clear_recovery_scheme_file_button" mnemonicParsing="false"
+                                                prefHeight="27.0" prefWidth="123.0"/>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="256.0" style="-fx-spacing: 4;">
+                            <children>
+                                <Label id="output_directory_label" prefHeight="17.0" prefWidth="326.0" textFill="WHITE">
+                                    <font>
+                                        <Font size="14.0"/>
+                                    </font>
+                                </Label>
+                                <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 10;">
+                                    <children>
+                                        <Button id="select_output_directory_button" mnemonicParsing="false"
+                                                prefHeight="27.0" prefWidth="123.0"/>
+                                        <Button id="clear_output_directory_button" mnemonicParsing="false"
+                                                prefHeight="27.0" prefWidth="123.0"/>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" focusTraversable="true" minWidth="-Infinity" prefHeight="126.0"
+                      prefWidth="170.0" style="-fx-spacing: 10;" HBox.hgrow="NEVER">
+                    <children>
+                        <StackPane prefHeight="96.0" prefWidth="75.0">
+                            <children>
+                                <Circle id="recover_secret_button" fill="WHITE" radius="48.0" stroke="BLACK"
+                                        strokeType="INSIDE" style="-fx-stroke-width: 0;"/>
+                                <ImageView fitHeight="49.0" fitWidth="48.0" mouseTransparent="true" pickOnBounds="true"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@/images/unlock.png"/>
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </StackPane>
+                        <Label id="recover_secret_button_label" alignment="CENTER" prefHeight="20.0" prefWidth="180.0"
+                               textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                            <font>
+                                <Font size="19.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</StackPane>
