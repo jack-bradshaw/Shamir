@@ -17,8 +17,8 @@ launch4j {
 
   jar = shadowJar.archivePath.getAbsolutePath()
 
-  version = project.ext.version
-  textVersion = project.ext.version
+  version = project.ext.windowsReleaseVersion
+  textVersion = project.ext.windowsReleaseVersion
 
   bundledJrePath = project.projectDir.absolutePath + '/deployment/JREs/windows'
   bundledJre64Bit = true
