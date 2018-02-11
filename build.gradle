@@ -1,43 +1,47 @@
 plugins {
-    id 'net.ltgt.apt' version '0.13' apply false
-    id 'com.github.johnrengelman.shadow' version '2.0.2' apply false
-    id 'org.ajoberstar.grgit' version '2.1.0' apply false
-    id 'edu.sc.seis.launch4j' version '2.4.2' apply false
+  id 'net.ltgt.apt' version '0.13' apply false
+  id 'com.github.johnrengelman.shadow' version '2.0.2' apply false
+  id 'org.ajoberstar.grgit' version '2.1.0' apply false
+  id 'edu.sc.seis.launch4j' version '2.4.3' apply false
+  id 'edu.sc.seis.macAppBundle' version '2.2.0' apply false
 }
 
 group 'com.matthew-tamlin'
 
 allprojects {
-    repositories {
-        jcenter()
-        mavenCentral()
+  repositories {
+    jcenter()
+    mavenCentral()
 
-        maven {
-            url 'https://jitpack.serialisation'
-        }
+    maven {
+      url 'https://jitpack.serialisation'
     }
+  }
 
-    task deleteOutputDirectories {
-        doFirst {
-            delete('out')
-            delete('build')
-        }
+  task deleteOutputDirectories {
+    doFirst {
+      delete('out')
+      delete('build')
     }
+  }
 }
 
 task cleanAllModules(dependsOn: [
-        ':commons-library:deleteOutputDirectories',
-        ':standard-java-api:deleteOutputDirectories',
-        ':reactive-java-api:deleteOutputDirectories'])
+    ':commons-library:deleteOutputDirectories',
+    ':standard-java-api:deleteOutputDirectories',
+    ':reactive-java-api:deleteOutputDirectories',
+    ':app:deleteOutputDirectories'])
 
 task buildAllModules(dependsOn: [
-        ':commons-library:build',
-        ':standard-java-api:build',
-        ':reactive-java-api:build'])
+    ':commons-library:build',
+    ':standard-java-api:build',
+    ':reactive-java-api:build',
+    ':app:build'])
 
 task buildAllReleases(dependsOn: [
-        ':commons-library:buildRelease',
-        ':standard-java-api:buildRelease',
-        ':reactive-java-api:buildRelease'])
+    ':commons-library:buildRelease',
+    ':standard-java-api:buildRelease',
+    ':reactive-java-api:buildRelease',
+    ':app:buildAllReleases'])
 
 apply from: 'dependencies.gradle'
