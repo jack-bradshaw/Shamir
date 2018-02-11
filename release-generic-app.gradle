@@ -1,24 +1,4 @@
-apply plugin: 'com.github.johnrengelman.shadow'
-
-jar {
-  manifest {
-    attributes "Main-Class": project.mainClassName
-  }
-}
-
-shadowJar {
-  archiveName = "generic-release.jar"
-}
-
-task buildGenericRelease(group: 'release') {
-  doFirst {
-    final File jre = new File(project.projectDir, 'deployment/JREs/mac-os')
-
-    if (!jre.exists()) {
-      throw new RuntimeException("MacOS JRE does not exist. Put JRE home in ${jre.getAbsolutePath()}.")
-    }
-  }
-}
+task buildGenericRelease(group: 'release') {}
 
 buildGenericRelease.finalizedBy(shadowJar)
 

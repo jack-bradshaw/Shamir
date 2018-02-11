@@ -1,11 +1,4 @@
-apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'edu.sc.seis.macAppBundle'
-
-jar {
-  manifest {
-    attributes "Main-Class": project.mainClassName
-  }
-}
 
 macAppBundle {
   mainClassName = project.mainClassName
