@@ -1,28 +1,18 @@
-apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'edu.sc.seis.launch4j'
-
-jar {
-  manifest {
-    attributes "Main-Class": project.mainClassName
-  }
-}
 
 launch4j {
   mainClassName = project.mainClassName
-
+  jar = shadowJar.archivePath.getAbsolutePath()
   outfile = project.ext.appName + ".exe"
 
   windowTitle = project.ext.appName
   icon = project.ext.windowsIconPath
-
-  jar = shadowJar.archivePath.getAbsolutePath()
 
   version = project.ext.windowsReleaseVersion
   textVersion = project.ext.windowsReleaseVersion
 
   bundledJrePath = project.projectDir.absolutePath + '/deployment/JREs/windows'
   bundledJre64Bit = true
-
 }
 
 task buildWindowsRelease(group: 'release') {
