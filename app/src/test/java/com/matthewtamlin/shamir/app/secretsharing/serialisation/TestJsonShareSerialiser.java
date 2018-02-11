@@ -1,9 +1,5 @@
 package com.matthewtamlin.shamir.app.secretsharing.serialisation;
 
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.matthewtamlin.shamir.commonslibrary.model.ModelTypeAdapterFactory;
 import com.matthewtamlin.shamir.commonslibrary.model.Share;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +12,7 @@ public class TestJsonShareSerialiser {
   
   @Before
   public void setup() {
-    final Gson gson = new GsonBuilder()
-        .registerTypeAdapterFactory(new ModelTypeAdapterFactory())
-        .create();
-    
-    serialiser = new JsonShareSerialiser(gson);
+    serialiser = new JsonShareSerialiser();
   }
   
   @Test(expected = IllegalArgumentException.class)
