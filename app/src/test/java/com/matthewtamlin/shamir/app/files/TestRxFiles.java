@@ -164,6 +164,84 @@ public class TestRxFiles {
   }
   
   @Test(expected = IllegalArgumentException.class)
+  public void testDelete_nullFile() {
+    rxFiles.delete(null);
+  }
+  
+  @Test
+  public void testDelete_fileWhichDoesNotExist() {
+    final File file = new File(testDirectory, "test.txt");
+    
+    rxFiles
+        .delete(file)
+        .test()
+        .awaitDone(200, MILLISECONDS)
+        .assertNoErrors()
+        .assertComplete();
+  }
+  
+  @Test
+  public void testDelete_fileWhichExists() throws IOException {
+    final File file = new File(testDirectory, "test.txt");
+    file.createNewFile();
+  
+    rxFiles
+        .delete(file)
+        .test()
+        .awaitDone(200, MILLISECONDS)
+        .assertNoErrors()
+        .assertComplete();
+    
+    assertThat("File was not deleted.", file.exists(), is(false));
+  }
+  
+  @Test
+  public void testDelete_directoryWhichDoesNotExist() {
+    final File directory = new File(testDirectory, "test");
+  
+    rxFiles
+        .delete(directory)
+        .test()
+        .awaitDone(200, MILLISECONDS)
+        .assertNoErrors()
+        .assertComplete();
+  }
+  
+  @Test
+  public void testDelete_directoryWhichDoesExistAndIsEmpty() throws IOException {
+    final File directory = new File(testDirectory, "test");
+    FileUtils.forceMkdir(directory);
+  
+    rxFiles
+        .delete(directory)
+        .test()
+        .awaitDone(200, MILLISECONDS)
+        .assertNoErrors()
+        .assertComplete();
+    
+    assertThat("Directory was not deleted.", directory.exists(), is(false));
+  }
+  
+  @Test
+  public void testDelete_directoryWhichDoesExistAndIsNotEmpty() throws IOException {
+    final File directory = new File(testDirectory, "test");
+    FileUtils.forceMkdir(directory);
+    
+    final File file = new File(directory, "test.txt");
+    file.createNewFile();
+  
+    rxFiles
+        .delete(directory)
+        .test()
+        .awaitDone(200, MILLISECONDS)
+        .assertNoErrors()
+        .assertComplete();
+  
+    assertThat("Directory was not deleted.", directory.exists(), is(false));
+    assertThat("File was not deleted.", file.exists(), is(false));
+  }
+  
+  @Test(expected = IllegalArgumentException.class)
   public void testGetFilesInDirectory_nullDirectory() {
     rxFiles.getFilesInDirectory(null);
   }

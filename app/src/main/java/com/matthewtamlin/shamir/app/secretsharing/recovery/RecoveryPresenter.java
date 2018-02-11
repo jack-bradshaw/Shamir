@@ -115,8 +115,9 @@ public class RecoveryPresenter {
     
     disposables.add(shareFilePathsAreSet
         .observeOn(viewScheduler)
-        .flatMapCompletable(
-            isSet -> isSet ? view.enableClearSelectedShareFilesButton() : view.disableClearSelectedShareFilesButton())
+        .flatMapCompletable(isSet -> isSet ?
+            view.enableClearSelectedShareFilesButton() :
+            view.disableClearSelectedShareFilesButton())
         .subscribe());
     
     disposables.add(recoverySchemeFilePathIsSet
@@ -266,6 +267,7 @@ public class RecoveryPresenter {
             .onErrorResumeNext(error -> view
                 .showDismissibleError(RECOVERY_FAILED)
                 .andThen(view.showRecoveryNotInProgress())
+                .andThen(rxFiles.delete(model.getRecoveredSecretFile()))
                 .andThen(Single.just(Optional.empty()))))
         .observeOn(presentationScheduler)
         .subscribe(recoveredSecret);
@@ -285,6 +287,7 @@ public class RecoveryPresenter {
                   .onErrorResumeNext(error -> view
                       .showDismissibleError(CANNOT_WRITE_TO_RECOVERED_SECRET_FILE)
                       .andThen(view.showRecoveryNotInProgress())
+                      .andThen(rxFiles.delete(model.get().getRecoveredSecretFile()))
                       .andThen(Completable.complete()));
             })
         .observeOn(presentationScheduler)

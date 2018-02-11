@@ -17,6 +17,7 @@ public class RxMocks {
     when(rxFiles.exists(any())).thenReturn(Single.never());
     when(rxFiles.createDirectory(any())).thenReturn(Completable.never());
     when(rxFiles.createNewFile(any())).thenReturn(Completable.never());
+    when(rxFiles.delete(any())).thenReturn(Completable.complete());
     when(rxFiles.readStringFromFile(any(), any())).thenReturn(Single.never());
     when(rxFiles.writeStringToFile(any(), any(), any())).thenReturn(Completable.never());
     when(rxFiles.getFilesInDirectory(any())).thenReturn(Observable.never());
