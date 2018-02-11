@@ -147,38 +147,45 @@ The GUI app provides a simple way to use Shamir's Secret Sharing.
 
 <img src="https://i.imgur.com/qt8NAGU.png" width="500">
 
-### Usage
-The GUI app is still in development so has not yet been released as a binary. To use it you'll need to build it from the source.
+### Download
+Native packages are available for MacOS and Windows, and a JAR is available for all other cases. The releases are available [here](https://github.com/MatthewTamlin/Shamir/releases).
 
-Start by getting a copy of the develop branch. You can download it from [Github](https://github.com/MatthewTamlin/Shamir/tree/develop) or clone it by running:
+Each releases is PGP signed for security, and the signer's public key can be found [here](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xA1A2F30F3885AE92).
+
+### Building from source
+You can also build the releases from the source for added security.
+
+Start by getting a copy of the master branch. You can download it from [Github](https://github.com/MatthewTamlin/Shamir/tree/master) or clone it by running:
 ```shell
 git clone -b develop https://github.com/MatthewTamlin/Shamir
 ```
 
-Now that you've got a copy of the code, you can build it by running a gradle command in the project's root directory.
+The native releases for Windows and MacOS come bundled with a minified JRE, however for technical and legal reasons the JREs aren't included in this repository. To install the JREs:
+- Download the MacOS and Windows TAR releases from [here](http://www.oracle.com/technetwork/java/javase/downloads/jre9-downloads-3848532.html)
+- Unzip the MacOS JRE and copy the contents of the unzipped `Home` directory to `/app/deployment/JREs/macos`.
+- Unzip the windows JRE to `/app/deployment/JREs/windows`.
 
-On Unix based systems:
+
+Next open the command line in the repository's root directory and run the following commands:
 ```shell
+# On Unix style command lines
 chmod +x gradlew
-./gradlew cleanAllModules buildAllModules :app:buildRelease
+./gradlew cleanAllModules buildAllModules :app:buildAllReleases
+
+# On Windows
+gradlew.bat cleanAllModules buildAllModules :app:buildAllReleases
 ```
 
-On Windows:
-```shell
-gradlew.bat cleanAllModules buildAllModules :app:buildRelease
-```
-
-The release will be deployed to `/app/build/distributions/app-$version.zip`. Unzip the release and run the binary to launch the GUI.
+The releases will be deployed to the relevant subdirectories of `/app/build/`.
 
 ### Limitations
 A 4096 bit prime is used as the basis of the finite field, therefore the GUI can only be used to share files which are less than 512 bytes long. To share larger files, first use a symmetric encryption protocol to encrypt the payload, and then use the GUI app to convert the key into shares. If you use a well-known protocol such as AES then there should be no problem distributing the encrypted payload with each share.
 
 ### Future work
 The next steps for the GUI app are:
-- Package the app for Windows, macOS and Linux.
+- Package the app for Windows and Linux.
 - Randomise the prime per installation.
 - Provide better descriptions when files are selected.
-- Encode the shares and the prime as base 64 strings when persisting them to the filesystem.
 
 ### Disclaimer
 The GUI app is still in development and **must not** be used for production secrets. The format of the output files could change at any time until a production release is made, therefore backwards compatibility is not assured. While the cryptosystem has been unit and integration tested by the author, a thorough external security audit has not been performed at the current time.
