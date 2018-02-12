@@ -28,7 +28,7 @@ You can also build the releases from the source for added security.
 
 Start by getting a copy of the master branch. You can download it from [Github](https://github.com/MatthewTamlin/Shamir/tree/master) or clone it by running:
 ```shell
-git clone -b develop https://github.com/MatthewTamlin/Shamir
+git clone -b master https://github.com/MatthewTamlin/Shamir
 ```
 
 The native releases for MacOS and Windows come bundled with a minified JRE, however for technical and legal reasons the JREs aren't included in this repository. To install the JREs:
