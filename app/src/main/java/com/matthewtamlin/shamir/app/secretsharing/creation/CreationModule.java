@@ -54,7 +54,7 @@ public class CreationModule {
   public CryptoConstants provideCryptoConstants() {
     return CryptoConstants
         .builder()
-        .setMaxFileSizeBytes(511)
+        .setMaxFileSizeBytes(510)
         .setPrime(
             new BigInteger("831426846410154605386922901726808670880783103996883772230399966068386871907041816489060005" +
                 "27799288728855880111103377007922967366161011597498072387315104504855641800875825141399655351374242211" +
