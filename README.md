@@ -182,7 +182,7 @@ gradlew.bat cleanAllModules buildAllModules :app:buildAllReleases
 
 If you just want to build a specific release, replace `:app:buildAllReleases` with `:app:buildMacOsRelease` or `:app:buildWindowsRelease`.
 
-The  subdirectories of `/app/build/` contain the release artifacts.
+The subdirectories of `/app/build/` contain the release artifacts.
 
 ### Limitations
 A 4096 bit prime is used as the basis of the finite field, therefore the GUI can only be used to share files which are at most 510 bytes long (two bytes are reserved for safety and encoding). To share larger files, first use a symmetric encryption protocol to encrypt the payload, and then use the GUI app to convert the key into shares. If you use a well-known protocol such as AES, then it should be safe to distribute the encrypted payload to each shareholder.
