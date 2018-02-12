@@ -192,8 +192,5 @@ The next steps for the GUI app are:
 - Randomise the prime per installation.
 - Provide better descriptions when files are selected.
 
-### Disclaimer
-The GUI app is still in development and **must not** be used for production secrets. The format of the output files could change at any time until a production release is made, therefore backwards compatibility is not assured. While the cryptosystem has been unit and integration tested by the author, a thorough external security audit has not been performed at the current time.
-
 ## Licensing
 The APIs and the GUI app are licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
