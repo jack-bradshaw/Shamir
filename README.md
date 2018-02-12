@@ -17,22 +17,22 @@ The GUI app provides a simple way to use Shamir's Secret Sharing.
 Native packages are available for MacOS and Windows, and a JAR is available for all other cases.
 
 Latest releases:
-- [MacOS](https://github.com/MatthewTamlin/Shamir/releases/tag/mac-os-app-v1.0.1).
-- [Windows](https://github.com/MatthewTamlin/Shamir/releases/tag/windows-app-v1.0.1).
-- JAR
+- [MacOS](https://github.com/MatthewTamlin/Shamir/releases/tag/mac-os-app-v1.0.1)
+- [Windows](https://github.com/MatthewTamlin/Shamir/releases/tag/windows-app-v1.0.1)
+- [JAR](https://github.com/MatthewTamlin/Shamir/releases/tag/generic-app-v1.0.0)
 
-Each releases is PGP signed for security, and the signer's public key can be found [here](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xA1A2F30F3885AE92).
+Each release is PGP signed for security, and the signer's public key can be found [here](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xA1A2F30F3885AE92).
 
 ### Building from source
 You can also build the releases from the source for added security.
 
 Start by getting a copy of the master branch. You can download it from [Github](https://github.com/MatthewTamlin/Shamir/tree/master) or clone it by running:
 ```shell
-git clone -b develop https://github.com/MatthewTamlin/Shamir
+git clone -b master https://github.com/MatthewTamlin/Shamir
 ```
 
 The native releases for MacOS and Windows come bundled with a minified JRE, however for technical and legal reasons the JREs aren't included in this repository. To install the JREs:
-- Download the MacOS and Windows TAR releases from [here](http://www.oracle.com/technetwork/java/javase/downloads/jre9-downloads-3848532.html)
+- Download the MacOS and Windows TAR releases from [here](http://www.oracle.com/technetwork/java/javase/downloads/jre9-downloads-3848532.html).
 - Unzip the MacOS JRE and copy the contents of the unzipped `Home` directory to `/app/deployment/JREs/macos`.
 - Unzip the windows JRE to `/app/deployment/JREs/windows`.
 
@@ -46,9 +46,9 @@ chmod +x gradlew
 gradlew.bat cleanAllModules buildAllModules :app:buildAllReleases
 ```
 
-If you just want to build a specific release, replace `:app:buildAllReleases` with `:app:buildMacOsRelease` or `:app:buildWindowsRelease`.
+If you only want to build the release for a specific platform, replace `:app:buildAllReleases` with `:app:buildMacOsRelease` or `:app:buildWindowsRelease`.
 
-The subdirectories of `/app/build/` contain the release artifacts.
+The release artifacts are deployed to the relevant subdirectories of `/app/build/`.
 
 ### Limitations
 A 4096 bit prime is used as the basis of the finite field, therefore the GUI can only be used to share files which are at most 510 bytes long (two bytes are reserved for safety and encoding). To share larger files, first use a symmetric encryption protocol to encrypt the payload, and then use the GUI app to convert the key into shares. If you use a well-known protocol such as AES, then it should be safe to distribute the encrypted payload to each shareholder.
