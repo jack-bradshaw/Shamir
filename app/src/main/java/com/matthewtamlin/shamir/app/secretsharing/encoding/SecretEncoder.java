@@ -27,7 +27,7 @@ public class SecretEncoder {
   public Single<byte[]> decodeSecret(@Nonnull final BigInteger encodedSecret) {
     checkNotNull(encodedSecret, "\'encodedSecret\' must not be null.");
     
-    Single.fromCallable(() -> {
+    return Single.fromCallable(() -> {
       final byte[] secretWithLeading1 = encodedSecret.toByteArray();
       final byte[] secretWithoutLeading1 = new byte[secretWithLeading1.length - 1];
       
