@@ -21,7 +21,7 @@ Latest releases:
 - [Windows](https://github.com/MatthewTamlin/Shamir/releases/tag/windows-app-v1.0.1)
 - [JAR](https://github.com/MatthewTamlin/Shamir/releases/tag/generic-app-v1.0.0)
 
-Each releases is PGP signed for security, and the signer's public key can be found [here](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xA1A2F30F3885AE92).
+Each release is PGP signed for security, and the signer's public key can be found [here](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xA1A2F30F3885AE92).
 
 ### Building from source
 You can also build the releases from the source for added security.
