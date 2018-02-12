@@ -32,7 +32,7 @@ git clone -b master https://github.com/MatthewTamlin/Shamir
 ```
 
 The native releases for MacOS and Windows come bundled with a minified JRE, however for technical and legal reasons the JREs aren't included in this repository. To install the JREs:
-- Download the MacOS and Windows TAR releases from [here](http://www.oracle.com/technetwork/java/javase/downloads/jre9-downloads-3848532.html)
+- Download the MacOS and Windows TAR releases from [here](http://www.oracle.com/technetwork/java/javase/downloads/jre9-downloads-3848532.html).
 - Unzip the MacOS JRE and copy the contents of the unzipped `Home` directory to `/app/deployment/JREs/macos`.
 - Unzip the windows JRE to `/app/deployment/JREs/windows`.
 
