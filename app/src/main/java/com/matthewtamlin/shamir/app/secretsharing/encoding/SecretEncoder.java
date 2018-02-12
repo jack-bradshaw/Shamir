@@ -33,7 +33,7 @@ public class SecretEncoder {
       
       System.arraycopy(secretWithLeading1, 1, secretWithoutLeading1, 0, secretWithoutLeading1.length);
       
-      return secretWithLeading1;
+      return secretWithoutLeading1;
     });
   }
 }
