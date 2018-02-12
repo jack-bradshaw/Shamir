@@ -151,7 +151,7 @@ The GUI app provides a simple way to use Shamir's Secret Sharing.
 Native packages are available for MacOS and Windows, and a JAR is available for all other cases.
 
 Latest releases:
-- [MacOS](https://github.com/MatthewTamlin/Shamir/releases/tag/mac-os-app-v1.0.0).
+- [MacOS](https://github.com/MatthewTamlin/Shamir/releases/tag/mac-os-app-v1.0.1).
 - [Windows](https://github.com/MatthewTamlin/Shamir/releases/tag/windows-app-v1.0.0).
 - JAR
 
