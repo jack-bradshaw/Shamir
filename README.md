@@ -190,7 +190,7 @@ The example yields a single that emits `973490247382347`. Thus the recovered sec
 The reactive API is compatible with Java 1.8 and up.
 
 ## Compatibility between APIs
-The standard API and the reactive API produce the same results given the same inputs, therefore the APIs can be used interchangably without migration/conversion.
+The standard API and the reactive API produce the same results given the same inputs, therefore the APIs can be used interchangeably without migration/conversion.
 
 ## Licensing
 The GUI app and the APIs are licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
