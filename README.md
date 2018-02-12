@@ -19,7 +19,7 @@ Native packages are available for MacOS and Windows, and a JAR is available for 
 Latest releases:
 - [MacOS](https://github.com/MatthewTamlin/Shamir/releases/tag/mac-os-app-v1.0.1).
 - [Windows](https://github.com/MatthewTamlin/Shamir/releases/tag/windows-app-v1.0.1).
-- JAR
+- [JAR](https://github.com/MatthewTamlin/Shamir/releases/tag/generic-app-v1.0.0)
 
 Each releases is PGP signed for security, and the signer's public key can be found [here](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xA1A2F30F3885AE92).
 
