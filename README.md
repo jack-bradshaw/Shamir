@@ -65,11 +65,11 @@ The standard Java API provides Shamir's Secret Sharing using standard Java patte
 To add the standard API to your project, add the following to you gradle build file:
 ```java
 repositories {
-	jcenter()
+  jcenter()
 }
 
 dependencies {
-	implementation 'com.matthew-tamlin:shamir:2.0.1'
+  implementation 'com.matthew-tamlin:shamir:2.0.1'
 }
 ```
 
@@ -98,11 +98,11 @@ BigInteger secret = new BigInteger("973490247382347");
 BigInteger prime = new BigInteger("2305843009213693951");
 
 CreationScheme creationScheme = CreationScheme
-		.builder()
-		.setRequiredShareCount(3)
-		.setTotalShareCount(5)
-		.setPrime(prime)
-		.build();
+    .builder()
+    .setRequiredShareCount(3)
+    .setTotalShareCount(5)
+    .setPrime(prime)
+    .build();
 
 Set<Share> shares = shamir.createShares(secret, creationScheme);
 ```
@@ -118,10 +118,10 @@ To recover the secret:
 ```
 // Must contain the same values as the creation scheme (excluding the total share count)
 RecoveryScheme recoveryScheme = RecoveryScheme
-		.builder()
-		.setRequiredShareCount(3)
-		.setPrime(prime)
-		.build();
+    .builder()
+    .setRequiredShareCount(3)
+    .setPrime(prime)
+    .build();
 
 // For brevity, assume there's some method that takes the first three shares
 Set<Share> threeShares = takeFirstThree(shares);
@@ -141,11 +141,11 @@ The reactive API is functionally the same as the standard API, but the interface
 To add the reactive API to your project, add the following to you gradle build file:
 ```java
 repositories {
-	jcenter()
+  jcenter()
 }
 
 dependencies {
-	implementation 'com.matthew-tamlin:rxshamir:2.0.1'
+  implementation 'com.matthew-tamlin:rxshamir:2.0.1'
 }
 ```
 
@@ -179,9 +179,9 @@ Each share contains an index and a value. The example yields an observable which
 To recover the secret:
 ```java
 Single<BigInteger> recoveredSecret = shares
-		.take(3)
-		.collectInto(new HashSet<Share>(), Set::add)
-		.flatMap(threeShares -> rxShamir.recoverSecret(threeShares, recoveryScheme));
+    .take(3)
+    .collectInto(new HashSet<Share>(), Set::add)
+    .flatMap(threeShares -> rxShamir.recoverSecret(threeShares, recoveryScheme));
 ```
 
 The example yields a single that emits `973490247382347`. Thus the recovered secret is equal to the original secret.
@@ -191,6 +191,3 @@ The reactive API is compatible with Java 1.8 and up.
 
 ## Compatibility between APIs
 The standard API and the reactive API produce the same results given the same inputs, therefore the APIs can be used interchangeably without migration/conversion.
-
-## Licensing
-The GUI app and the APIs are licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
