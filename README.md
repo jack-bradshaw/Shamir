@@ -8,6 +8,8 @@ All forms use finite field arithmetic to prevent geometric attacks.
 
 Having at least a cursory understanding of Shamir's Secret Sharing is beneficial before using the APIs. The [Wikipedia entry](https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) is recommended as a good starting point.
 
+**SUPPORT NOTICE: This library is stable. It is no longer under active development, however pull requests from others are still being accepted.**
+
 ## GUI app
 The GUI app provides a simple way to use Shamir's Secret Sharing.
 
